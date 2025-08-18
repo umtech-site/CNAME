@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional diagnostic ultrasound services by Dr. AL-Kashif Umair">
     <title>TheUmTech | Diagnostic Ultrasound Services</title>
     <style>
         body {
@@ -11,6 +12,7 @@
             margin: 0;
             padding: 20px;
             background-color: #f5f5f5;
+            color: #333;
         }
         .profile-container {
             display: flex;
@@ -29,6 +31,10 @@
             margin-right: 30px;
             cursor: pointer;
             transition: transform 0.3s;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .profile-image:hover {
             transform: scale(1.02);
@@ -56,19 +62,23 @@
         .profile-title {
             color: #ff6b35;
             margin-bottom: 15px;
+            font-size: 1.2em;
         }
         .credentials {
             background-color: #f8f9fa;
             padding: 15px;
             border-radius: 5px;
             margin-top: 20px;
+            border-left: 4px solid #005b96;
         }
         .contact-links {
             margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .contact-link {
             display: inline-block;
-            margin-right: 15px;
             padding: 8px 15px;
             border-radius: 4px;
             text-decoration: none;
@@ -94,7 +104,6 @@
         .form-link {
             background-color: #005b96;
             color: white;
-            margin-top: 10px;
         }
         .form-link:hover {
             background-color: #003d66;
@@ -109,24 +118,15 @@
                 width: 100%;
                 max-width: 236px;
             }
-            .contact-links {
-                display: flex;
-                flex-direction: column;
-            }
-            .contact-link {
-                margin-bottom: 10px;
-                margin-right: 0;
-                text-align: center;
-            }
         }
     </style>
 </head>
 <body>
     <div class="profile-container">
         <a href="https://www.facebook.com/1MUmairUllah/" target="_blank" class="profile-image">
-            <img src="file:///D:/visual/images/profile.jpg" 
+            <img src="images/thumbnail.jpg.jpg" 
                  alt="Dr. AL-Kashif Umair"
-                 onerror="handleImageError(this)">
+                 onerror="this.src='https://via.placeholder.com/236x320/005b96/ffffff?text=Dr.+AL-Kashif+Umair';this.onerror=null;">
         </a>
         <div class="profile-content">
             <a href="https://www.facebook.com/1MUmairUllah/" target="_blank" class="profile-name">
@@ -157,48 +157,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function handleImageError(img) {
-            console.log('Image failed to load from:', img.src);
-            
-            // Try these alternative paths in order
-            const pathAttempts = [
-                'file:///D:/visual/images/thumbnail.jpg.jpg', // D: drive path
-                'visual/images/profile.jpg', // Relative path 1
-                <img src="images/thumbnail.jpg.jpg"        // Relative path 2
-                'profile.jpg',              // Root folder
-                'https://via.placeholder.com/236x320/005b96/ffffff?text=Dr.+AL-Kashif+Umair' // Final fallback
-            ];
-            
-            let currentAttempt = 0;
-            
-            function tryNextPath() {
-                if (currentAttempt >= pathAttempts.length) return;
-                
-                const testImg = new Image();
-                testImg.onload = function() {
-                    img.src = pathAttempts[currentAttempt];
-                    console.log('Image loaded from:', pathAttempts[currentAttempt]);
-                };
-                testImg.onerror = function() {
-                    currentAttempt++;
-                    tryNextPath();
-                };
-                testImg.src = pathAttempts[currentAttempt];
-            }
-            
-            tryNextPath();
-        }
-        
-        // Initialize image check on load
-        document.addEventListener('DOMContentLoaded', function() {
-            const img = document.querySelector('.profile-image img');
-            if (!img.complete || img.naturalWidth === 0) {
-                handleImageError(img);
-            }
-        });
-    </script>
 </body>
-
 </html>
