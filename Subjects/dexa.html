@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEXA Scan Study Portal - TheUmTech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a4c, #2c3e50, #34495e);
+            color: #ecf0f1;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            color: #2c3e50;
+        }
+        
+        header {
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon {
+            margin-right: 15px;
+            font-size: 2.8rem;
+        }
+        
+        .tagline {
+            font-style: italic;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        .disclaimer {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            border-bottom: 2px solid #c0392b;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        
+        .body-parts {
+            flex: 1;
+            min-width: 300px;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        
+        .body-parts h2 {
+            color: #2980b9;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+        }
+        
+        .part-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .part-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: #3498db;
+            color: white;
+        }
+        
+        .part-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #3498db;
+        }
+        
+        .part-card:hover .part-icon {
+            color: white;
+        }
+        
+        .study-details {
+            flex: 2;
+            min-width: 300px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        
+        .study-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .study-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            color: #2980b9;
+        }
+        
+        .study-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .welcome-icon {
+            font-size: 5rem;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .welcome-text {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .welcome-text h2 {
+            color: #2980b9;
+            margin-bottom: 15px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .info-card {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .info-card h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .protocol-steps {
+            margin: 20px 0;
+        }
+        
+        .protocol-steps ol {
+            padding-left: 25px;
+        }
+        
+        .protocol-steps li {
+            margin-bottom: 10px;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 30px;
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .feature {
+            text-align: center;
+            max-width: 250px;
+            margin: 15px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(to right, #2c3e50, #1a2a4c);
+            color: #ecf0f1;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .body-parts {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+        
+        .btn {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 10px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+            font-family: inherit;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, #2980b9, #3498db);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .active-part {
+            background: #3498db !important;
+            color: white !important;
+        }
+        
+        .active-part .part-icon {
+            color: white !important;
+        }
+        
+        .anatomy-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(to right, #bdc3c7, #ecf0f1);
+            border-radius: 8px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #ecf0f1;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .tab.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-icon"><i class="fas fa-bone"></i></span>
+                <span>DEXA Scan Study Portal</span>
+            </div>
+            <p class="tagline">Educational resource for bone density scanning technologists and students</p>
+        </header>
+        
+        <div class="disclaimer">
+            <p><i class="fas fa-exclamation-triangle"></i> This website was created by a single radiological technologist for own study purposes.</p>
+            <p>Please use this website for educational purposes only. Do not rely solely on this information for patient imaging. Use it at your own risk.</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="body-parts">
+                <h2>Select DEXA Area</h2>
+                <div class="parts-grid">
+                    <div class="part-card active-part" onclick="showPart('lumbar-spine')">
+                        <div class="part-icon"><i class="fas fa-arrow-up"></i></div>
+                        <p>Lumbar Spine</p>
+                    </div>
+                    <div class="part-card" onclick="showPart('hip')">
+                        <div class="part-icon"><i class="fas fa-vector-square"></i></div>
+                        <p>Hip/Femur</p>
+                    </div>
+                    <div class="part-card" onclick="showPart('forearm')">
+                        <div class="part-icon"><i class="fas fa-hand-paper"></i></div>
+                        <p>Forearm</p>
+                    </div>
+                    <div class="part-card" onclick="showPart('whole-body')">
+                        <div class="part-icon"><i class="fas fa-male"></i></div>
+                        <p>Whole Body</p>
+                    </div>
+                    <div class="part-card" onclick="showPart('pediatric')">
+                        <div class="part-icon"><i class="fas fa-child"></i></div>
+                        <p>Pediatric</p>
+                    </div>
+                    <div class="part-card" onclick="showPart('vertebral')">
+                        <div class="part-icon"><i class="fas fa-certificate"></i></div>
+                        <p>Vertebral Assessment</p>
+                    </div>
+                    <div class="part-card" onclick="showPart('body')">
+                        <div class="part-icon"><i class="fas fa-chart-pie"></i></div>
+                        <p>Body Composition</p>
+                    </div>
+                    <div class="part-card" onclick="showPart('equipment')">
+                        <div class="part-icon"><i class="fas fa-tools"></i></div>
+                        <p>Equipment Guide</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="study-details">
+                <div class="study-header">
+                    <div class="study-icon"><i class="fas fa-arrow-up"></i></div>
+                    <div>
+                        <h2>Lumbar Spine DEXA Examination</h2>
+                        <p>Comprehensive guide to lumbar spine bone density scanning</p>
+                    </div>
+                </div>
+                
+                <div class="study-content">
+                    <div class="tabs">
+                        <div class="tab active" onclick="switchTab('overview')">Overview</div>
+                        <div class="tab" onclick="switchTab('positioning')">Positioning</div>
+                        <div class="tab" onclick="switchTab('analysis')">Analysis</div>
+                        <div class="tab" onclick="switchTab('clinical')">Clinical</div>
+                    </div>
+                    
+                    <div id="overview" class="tab-content active">
+                        <h3>Anatomy Overview</h3>
+                        <div class="anatomy-image">
+                            <p>Lumbar spine anatomy illustration would appear here</p>
+                        </div>
+                        
+                        <p>The lumbar spine consists of five vertebrae (L1-L5) located in the lower back. DEXA scanning of this area is crucial for diagnosing osteoporosis and monitoring treatment efficacy. Proper patient positioning is essential for accurate results.</p>
+                        
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h4>Common Indications</h4>
+                                <ul>
+                                    <li>Postmenopausal women</li>
+                                    <li>Long-term steroid use</li>
+                                    <li>Previous fragility fracture</li>
+                                    <li>Monitoring osteoporosis treatment</li>
+                                </ul>
+                            </div>
+                            <div class="info-card">
+                                <h4>Technical Factors</h4>
+                                <ul>
+                                    <li>Dual-energy X-ray source</li>
+                                    <li>Low radiation dose (1-10 μSv)</li>
+                                    <li>Scan time: 1-5 minutes</li>
+                                    <li>High resolution detection</li>
+                                </ul>
+                            </div>
+                            <div class="info-card">
+                                <h4>Patient Preparation</h4>
+                                <ul>
+                                    <li>No calcium supplements 24h prior</li>
+                                    <li>Wear metal-free clothing</li>
+                                    <li>Remove jewelry/zippers</li>
+                                    <li>Report recent contrast studies</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="positioning" class="tab-content">
+                        <h3>Positioning Protocol</h3>
+                        <div class="protocol-steps">
+                            <ol>
+                                <li><strong>Patient positioning</strong>: Supine on scanning table with hips and knees flexed using positioning block</li>
+                                <li><strong>Spine alignment</strong>: Ensure spine is straight and centered on table</li>
+                                <li><strong>Arms placement</strong>: Positioned away from scanning field</li>
+                                <li><strong>Scan area</strong>: From L1 to L5 vertebrae</li>
+                                <li><strong>Analysis</strong>: Automated ROI placement with technologist verification</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h4>Common Challenges</h4>
+                                <ul>
+                                    <li>Scoliosis or spinal deformity</li>
+                                    <li>Osteoarthritis with osteophytes</li>
+                                    <li>Previous spinal surgery</li>
+                                    <li>Patient movement during scan</li>
+                                </ul>
+                            </div>
+                            <div class="info-card">
+                                <h4>Quality Control</h4>
+                                <ul>
+                                    <li>Daily calibration checks</li>
+                                    <li>Spine phantom scanning</li>
+                                    <li>Regular service maintenance</li>
+                                    <li>Technologist competency assessment</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="analysis" class="tab-content">
+                        <h3>T-Score Interpretation</h3>
+                        <table>
+                            <tr>
+                                <th>T-Score Range</th>
+                                <th>Classification</th>
+                                <th>Clinical Significance</th>
+                            </tr>
+                            <tr>
+                                <td>-1.0 and above</td>
+                                <td>Normal</td>
+                                <td>Normal bone density</td>
+                            </tr>
+                            <tr>
+                                <td>-1.0 to -2.5</td>
+                                <td>Osteopenia</td>
+                                <td>Low bone mass</td>
+                            </tr>
+                            <tr>
+                                <td>-2.5 and below</td>
+                                <td>Osteoporosis</td>
+                                <td>High fracture risk</td>
+                            </tr>
+                            <tr>
+                                <td>-2.5 and below with fracture</td>
+                                <td>Severe Osteoporosis</td>
+                                <td>Established bone fragility</td>
+                            </tr>
+                        </table>
+                        
+                        <h3>Z-Score Interpretation</h3>
+                        <table>
+                            <tr>
+                                <th>Z-Score Range</th>
+                                <th>Interpretation</th>
+                            </tr>
+                            <tr>
+                                <td>-2.0 and above</td>
+                                <td>Within expected range for age</td>
+                            </tr>
+                            <tr>
+                                <td>Below -2.0</td>
+                                <td>Lower than expected for age</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div id="clinical" class="tab-content">
+                        <h3>Clinical Applications</h3>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h4>Diagnostic Criteria</h4>
+                                <ul>
+                                    <li>WHO classification system</li>
+                                    <li>Lowest T-score at hip or spine</li>
+                                    <li>Consider clinical risk factors</li>
+                                    <li>FRAX® algorithm integration</li>
+                                </ul>
+                            </div>
+                            <div class="info-card">
+                                <h4>Monitoring Changes</h4>
+                                <ul>
+                                    <li>Minimum 1-2 years between scans</li>
+                                    <li>LSC (Least Significant Change) concept</li>
+                                    <li>Same machine preferred for follow-up</li>
+                                    <li>Consider biological variability</li>
+                                </ul>
+                            </div>
+                            <div class="info-card">
+                                <h4>Reporting</h4>
+                                <ul>
+                                    <li>Include T-scores and Z-scores</li>
+                                    <li>Reference database used</li>
+                                    <li>Technical quality assessment</li>
+                                    <li>Clinical correlation advice</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <h3>FRAX® Assessment</h3>
+                        <p>The FRAX® tool integrates bone density results with clinical risk factors to estimate 10-year probability of major osteoporotic fracture.</p>
+                        
+                        <button class="btn">Download DEXA Study Guide (PDF)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-book-medical"></i></div>
+                <h3>Study Guides</h3>
+                <p>Comprehensive guides for each scanning area</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-vial"></i></div>
+                <h3>Practice Quizzes</h3>
+                <p>Test your knowledge with our question bank</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-procedures"></i></div>
+                <h3>Positioning Tips</h3>
+                <p>Learn proper patient positioning techniques</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Welcome to TheUmTech DEXA Study Portal – your educational resource for bone density scanning.</p>
+            <p>Powered by knowledge. Built with precision. Delivered with purpose.</p>
+            <p>© 2025 TheUmTech. All rights reserved. For educational purposes only.</p>
+        </footer>
+    </div>
+    
+    <script>
+        function showPart(part) {
+            // Update active card
+            const cards = document.querySelectorAll('.part-card');
+            cards.forEach(card => card.classList.remove('active-part'));
+            event.currentTarget.classList.add('active-part');
+            
+            // Update content based on selected part
+            const studyHeader = document.querySelector('.study-header');
+            const studyContent = document.querySelector('.study-content');
+            const studyIcon = document.querySelector('.study-icon');
+            
+            // Change icon and title based on selection
+            switch(part) {
+                case 'lumbar-spine':
+                    studyIcon.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                    studyHeader.querySelector('h2').textContent = 'Lumbar Spine DEXA Examination';
+                    studyHeader.querySelector('p').textContent = 'Comprehensive guide to lumbar spine bone density scanning';
+                    updateContent('lumbar-spine');
+                    break;
+                case 'hip':
+                    studyIcon.innerHTML = '<i class="fas fa-vector-square"></i>';
+                    studyHeader.querySelector('h2').textContent = 'Hip/Femur DEXA Examination';
+                    studyHeader.querySelector('p').textContent = 'Comprehensive guide to hip and femur bone density scanning';
+                    updateContent('hip');
+                    break;
+                case 'forearm':
+                    studyIcon.innerHTML = '<i class="fas fa-hand-paper"></i>';
+                    studyHeader.querySelector('h2').textContent = 'Forearm DEXA Examination';
+                    studyHeader.querySelector('p').textContent = 'Comprehensive guide to forearm bone density scanning';
+                    updateContent('forearm');
+                    break;
+                case 'whole-body':
+                    studyIcon.innerHTML = '<i class="fas fa-male"></i>';
+                    studyHeader.querySelector('h2').textContent = 'Whole Body DEXA Examination';
+                    studyHeader.querySelector('p').textContent = 'Comprehensive guide to whole body composition analysis';
+                    updateContent('whole-body');
+                    break;
+                case 'pediatric':
+                    studyIcon.innerHTML = '<i class="fas fa-child"></i>';
+                    studyHeader.querySelector('h2').textContent = 'Pediatric DEXA Examination';
+                    studyHeader.querySelector('p').textContent = 'Special considerations for pediatric bone density scanning';
+                    updateContent('pediatric');
+                    break;
+                case 'vertebral':
+                    studyIcon.innerHTML = '<i class="fas fa-certificate"></i>';
+                    studyHeader.querySelector('h2').textContent = 'Vertebral Fracture Assessment';
+                    studyHeader.querySelector('p').textContent = 'Comprehensive guide to vertebral fracture assessment';
+                    updateContent('vertebral');
+                    break;
+                case 'body':
+                    studyIcon.innerHTML = '<i class="fas fa-chart-pie"></i>';
+                    studyHeader.querySelector('h2').textContent = 'Body Composition Analysis';
+                    studyHeader.querySelector('p').textContent = 'Comprehensive guide to body composition analysis';
+                    updateContent('body');
+                    break;
+                case 'equipment':
+                    studyIcon.innerHTML = '<i class="fas fa-tools"></i>';
+                    studyHeader.querySelector('h2').textContent = 'DEXA Equipment Guide';
+                    studyHeader.querySelector('p').textContent = 'Guide to DEXA scanning equipment and quality control';
+                    updateContent('equipment');
+                    break;
+            }
+            
+            // Reset to overview tab when changing body part
+            switchTab('overview');
+        }
+        
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Update tab buttons
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+        
+        function updateContent(part) {
+            const studyContent = document.querySelector('.study-content');
+            
+            // Clear previous content
+            studyContent.innerHTML = '';
+            
+            // Add content based on selected body part
+            switch(part) {
+                case 'lumbar-spine':
+                    studyContent.innerHTML = `
+                        <div class="tabs">
+                            <div class="tab active" onclick="switchTab('overview')">Overview</div>
+                            <div class="tab" onclick="switchTab('positioning')">Positioning</div>
+                            <div class="tab" onclick="switchTab('analysis')">Analysis</div>
+                            <div class="tab" onclick="switchTab('clinical')">Clinical</div>
+                        </div>
+                        
+                        <div id="overview" class="tab-content active">
+                            <h3>Anatomy Overview</h3>
+                            <div class="anatomy-image">
+                                <p>Lumbar spine anatomy illustration would appear here</p>
+                            </div>
+                            
+                            <p>The lumbar spine consists of five vertebrae (L1-L5) located in the lower back. DEXA scanning of this area is crucial for diagnosing osteoporosis and monitoring treatment efficacy. Proper patient positioning is essential for accurate results.</p>
+                            
+                            <div class="info-grid">
+                                <div class="info-card">
+                                    <h4>Common Indications</h4>
+                                    <ul>
+                                        <li>Postmenopausal women</li>
+                                        <li>Long-term steroid use</li>
+                                        <li>Previous fragility fracture</li>
+                                        <li>Monitoring osteoporosis treatment</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Technical Factors</h4>
+                                    <ul>
+                                        <li>Dual-energy X-ray source</li>
+                                        <li>Low radiation dose (1-10 μSv)</li>
+                                        <li>Scan time: 1-5 minutes</li>
+                                        <li>High resolution detection</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Patient Preparation</h4>
+                                    <ul>
+                                        <li>No calcium supplements 24h prior</li>
+                                        <li>Wear metal-free clothing</li>
+                                        <li>Remove jewelry/zippers</li>
+                                        <li>Report recent contrast studies</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="positioning" class="tab-content">
+                            <h3>Positioning Protocol</h3>
+                            <div class="protocol-steps">
+                                <ol>
+                                    <li><strong>Patient positioning</strong>: Supine on scanning table with hips and knees flexed using positioning block</li>
+                                    <li><strong>Spine alignment</strong>: Ensure spine is straight and centered on table</li>
+                                    <li><strong>Arms placement</strong>: Positioned away from scanning field</li>
+                                    <li><strong>Scan area</strong>: From L1 to L5 vertebrae</li>
+                                    <li><strong>Analysis</strong>: Automated ROI placement with technologist verification</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="info-grid">
+                                <div class="info-card">
+                                    <h4>Common Challenges</h4>
+                                    <ul>
+                                        <li>Scoliosis or spinal deformity</li>
+                                        <li>Osteoarthritis with osteophytes</li>
+                                        <li>Previous spinal surgery</li>
+                                        <li>Patient movement during scan</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Quality Control</h4>
+                                    <ul>
+                                        <li>Daily calibration checks</li>
+                                        <li>Spine phantom scanning</li>
+                                        <li>Regular service maintenance</li>
+                                        <li>Technologist competency assessment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="analysis" class="tab-content">
+                            <h3>T-Score Interpretation</h3>
+                            <table>
+                                <tr>
+                                    <th>T-Score Range</th>
+                                    <th>Classification</th>
+                                    <th>Clinical Significance</th>
+                                </tr>
+                                <tr>
+                                    <td>-1.0 and above</td>
+                                    <td>Normal</td>
+                                    <td>Normal bone density</td>
+                                </tr>
+                                <tr>
+                                    <td>-1.0 to -2.5</td>
+                                    <td>Osteopenia</td>
+                                    <td>Low bone mass</td>
+                                </tr>
+                                <tr>
+                                    <td>-2.5 and below</td>
+                                    <td>Osteoporosis</td>
+                                    <td>High fracture risk</td>
+                                </tr>
+                                <tr>
+                                    <td>-2.5 and below with fracture</td>
+                                    <td>Severe Osteoporosis</td>
+                                    <td>Established bone fragility</td>
+                                </tr>
+                            </table>
+                            
+                            <h3>Z-Score Interpretation</h3>
+                            <table>
+                                <tr>
+                                    <th>Z-Score Range</th>
+                                    <th>Interpretation</th>
+                                </tr>
+                                <tr>
+                                    <td>-2.0 and above</td>
+                                    <td>Within expected range for age</td>
+                                </tr>
+                                <tr>
+                                    <td>Below -2.0</td>
+                                    <td>Lower than expected for age</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div id="clinical" class="tab-content">
+                            <h3>Clinical Applications</h3>
+                            <div class="info-grid">
+                                <div class="info-card">
+                                    <h4>Diagnostic Criteria</h4>
+                                    <ul>
+                                        <li>WHO classification system</li>
+                                        <li>Lowest T-score at hip or spine</li>
+                                        <li>Consider clinical risk factors</li>
+                                        <li>FRAX® algorithm integration</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Monitoring Changes</h4>
+                                    <ul>
+                                        <li>Minimum 1-2 years between scans</li>
+                                        <li>LSC (Least Significant Change) concept</li>
+                                        <li>Same machine preferred for follow-up</li>
+                                        <li>Consider biological variability</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Reporting</h4>
+                                    <ul>
+                                        <li>Include T-scores and Z-scores</li>
+                                        <li>Reference database used</li>
+                                        <li>Technical quality assessment</li>
+                                        <li>Clinical correlation advice</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h3>FRAX® Assessment</h3>
+                            <p>The FRAX® tool integrates bone density results with clinical risk factors to estimate 10-year probability of major osteoporotic fracture.</p>
+                            
+                            <button class="btn">Download DEXA Study Guide (PDF)</button>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'hip':
+                    studyContent.innerHTML = `
+                        <div class="tabs">
+                            <div class="tab active" onclick="switchTab('overview')">Overview</div>
+                            <div class="tab" onclick="switchTab('positioning')">Positioning</div>
+                            <div class="tab" onclick="switchTab('analysis')">Analysis</div>
+                        </div>
+                        
+                        <div id="overview" class="tab-content active">
+                            <h3>Hip Anatomy Overview</h3>
+                            <div class="anatomy-image">
+                                <p>Hip anatomy illustration would appear here</p>
+                            </div>
+                            
+                            <p>The hip region includes the femoral neck, trochanteric region, and total hip area. These sites are particularly important for predicting fracture risk. Proper internal rotation of the femur is critical for accurate measurement.</p>
+                            
+                            <div class="info-grid">
+                                <div class="info-card">
+                                    <h4>Key Measurement Sites</h4>
+                                    <ul>
+                                        <li>Femoral neck</li>
+                                        <li>Trochanteric region</li>
+                                        <li>Total hip</li>
+                                        <li>Ward's triangle</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Positioning Requirements</h4>
+                                    <ul>
+                                        <li>15-25° internal rotation</li>
+                                        <li>Leg straight alignment</li>
+                                        <li>Secure foot positioning</li>
+                                        <li>Spine straight on table</li>
+                                    </ul>
+                                </div>
+                                <div class="info-card">
+                                    <h4>Common Challenges</h4>
+                                    <ul>
+                                        <li>Arthritis limitations</li>
+                                        <li>Rotation difficulties</li>
+                                        <li>Previous hip surgery</li>
+                                        <li>Obesity artifacts</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="positioning" class="tab-content">
+                            <h3>Positioning Protocol</h3>
+                            <div class="protocol-steps">
+                                <ol>
+                                    <li><strong>Patient positioning</strong>: Supine with legs extended</li>
+                                    <li><strong>Femoral rotation</strong>: Internally rotate femur 15-25° using positioning device</li>
+                                    <li><strong>Alignment</strong>: Ensure femoral shaft is straight and centered</li>
+                                    <li><strong>Scan area</strong>: From iliac crest to lesser trochanter</li>
+                                    <li><strong>Analysis</strong>: Automated ROI placement with manual adjustment if needed</li>
+                                </ol>
+                            </div>
+                            
+                            <div class="info-grid">
+                                <div class="info-card">
+                                    <h4>Rotation Assessment</h4>
+                                    <ul>
+                                        <li>Lesser trochanter visibility indicates rotation</li>
+                                        <li>Ideal: minimal lesser trochanter visible</li>
+                                        <li>Excessive rotation affects neck BMD</li>
+                                        <li>Insufficient rotation affects shaft measurement</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="analysis" class="tab-content">
+                            <h3>Hip T-Score Interpretation</h3>
+                            <table>
+                                <tr>
+                                    <th>Site</th>
+                                    <th>Normal Range</th>
+                                    <th>Osteopenic Range</th>
+                                    <th>Osteoporotic Range</th>
+                                </tr>
+                                <tr>
+                                    <td>Femoral Neck</td>
+                                    <td>> -1.0</td>
+                                    <td>-1.0 to -2.5</td>
+                                    <td>< -2.5</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Hip</td>
+                                    <td>> -1.0</td>
+                                    <td>-1.0 to -2.5</td>
+                                    <td>< -2.5</td>
+                                </tr>
+                            </table>
+                            
+                            <button class="btn">Download Hip DEXA Guide (PDF)</button>
+                        </div>
+                    `;
+                    break;
+                    
+                default:
+                    studyContent.innerHTML = `
+                        <div class="welcome-icon">
+                            <i class="fas fa-bone"></i>
+                        </div>
+                        <div class="welcome-text">
+                            <h2>Welcome to the DEXA Study Portal</h2>
+                            <p>Select a scanning area from the menu to view detailed information about DEXA techniques, positioning, and protocols.</p>
+                            <p>This portal is designed to help bone density technologists and students improve their knowledge and skills in DEXA scanning.</p>
+                        </div>
+                    `;
+            }
+            
+            // Initialize tab functionality
+            const tabs = studyContent.querySelectorAll('.tab');
+            if (tabs.length > 0) {
+                tabs[0].classList.add('active');
+            }
+        }
+        
+        // Initialize the page with lumbar spine content
+        document.addEventListener('DOMContentLoaded', function() {
+            updateContent('lumbar-spine');
+        });
+    </script>
+</body>
+</html>
