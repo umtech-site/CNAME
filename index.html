@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="TheUmTech Institute - Premier Diagnostic Imaging Education">
+  <meta name="keywords" content="diagnostic imaging, ultrasound, x-ray, MRI, CT scan, medical education">
+  <title>TheUmTech | Advanced Diagnostic Imaging Institute</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #1a237e;
+      --primary-light: #534bae;
+      --secondary-color: #ff6f61;
+      --accent-color: #25D366;
+      --error-color: #d44638;
+      --light-bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-color: #2d3748;
+      --text-light: #4a5568;
+      --brand-color: #6a1b9a;
+      --brand-light: #9c27b0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #ff6b6b 0%, #ff9a3d 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      --gradient-6: linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
+      --gradient-7: linear-gradient(135deg, #5ee7df 0%, #b490ca 100%);
+      --gradient-8: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+    }
+
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+      color: var(--text-color);
+      line-height: 1.7;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .welcome-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeIn 1s ease-in;
+      padding: 3rem 1rem;
+      background: var(--gradient-1);
+      border-radius: 20px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .welcome-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 20%);
+      background-size: 20px 20px;
+      transform: rotate(30deg);
+      pointer-events: none;
+    }
+
+    .welcome-heading {
+      font-size: 2.75rem;
+      color: white;
+      margin-bottom: 1.25rem;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.75rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .welcome-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 5px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 3px;
+    }
+
+    .welcome-subheading {
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 2rem;
+      font-size: 1.25rem;
+      font-weight: 400;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .welcome-button {
+      padding: 1rem 2.5rem;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .welcome-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.3);
+    }
+
+    .welcome-button:active {
+      transform: translateY(1px);
+    }
+
+    .welcome-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .welcome-button:hover::before { 
+      left: 100%; 
+    }
+
+    .profile-container {
+      display: flex;
+      flex-direction: column;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      padding: 2.5rem;
+      margin: 2rem auto;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 1000px;
+      overflow: hidden;
+      position: relative;
+      border-left: 5px solid var(--brand-color);
+    }
+
+    .profile-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: var(--gradient-2);
+      border-radius: 0 0 0 100px;
+      z-index: 0;
+    }
+
+    .profile-container:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+
+    @media (min-width: 768px) {
+      .profile-container { 
+        flex-direction: row; 
+        gap: 2.5rem;
+      }
+    }
+
+    .profile-image-container {
+      width: 280px;
+      height: 320px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 0 auto;
+      background: var(--gradient-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-md);
+      border: 4px solid white;
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-image-container:hover .profile-image {
+      transform: scale(1.05);
+    }
+
+    .profile-content { 
+      flex: 1; 
+      padding-top: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-name {
+      color: var(--brand-color);
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+      font-size: 1.75rem;
+      font-weight: 700;
+      display: inline-block;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .profile-name::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--gradient-2);
+      transition: width 0.3s ease;
+    }
+
+    .profile-name:hover::after {
+      width: 100%;
+    }
+
+    .profile-name:hover {
+      color: var(--primary-color);
+    }
+
+    .profile-title {
+      color: var(--secondary-color);
+      margin-bottom: 1.25rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .profile-description {
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      font-size: 1.05rem;
+    }
+
+    .credentials {
+      background: linear-gradient(to right, rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.9));
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      border-left: 5px solid var(--primary-color);
+      backdrop-filter: blur(5px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .credentials h3 {
+      margin-bottom: 0.75rem;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    .credentials-list {
+      list-style-type: none;
+    }
+
+    .credentials-list li {
+      padding-left: 1.75rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      font-size: 1rem;
+    }
+
+    .credentials-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0.5rem;
+      color: var(--secondary-color);
+      font-weight: bold;
+    }
+
+    .contact-links {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-link:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .contact-link i {
+      margin-right: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .email-link { background: var(--gradient-2); }
+    .email-link:hover { background: linear-gradient(135deg, #e55a50 0%, #e58c3d 100%); }
+
+    .whatsapp-link { background: var(--gradient-4); }
+    .whatsapp-link:hover { background: linear-gradient(135deg, #3bd68c 0%, #31d4c9 100%); }
+
+    .form-link { background: var(--gradient-1); }
+    .form-link:hover { background: linear-gradient(135deg, #5a73e0 0%, #694d9e 100%); }
+
+    .fade-in { 
+      animation: fadeIn 0.8s ease-in forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .subject-section {
+      padding: 2rem 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0 1rem;
+    }
+
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-1);
+      border-radius: 3px;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .subject-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-radius: 16px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .subject-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      z-index: -1;
+      transition: opacity 0.3s ease;
+    }
+
+    .subject-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.1);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .subject-card:hover::after {
+      opacity: 1;
+    }
+
+    .subject-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .subject-card:hover i {
+      transform: scale(1.2);
+    }
+
+    footer {
+      background: var(--gradient-1);
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      font-size: 1rem;
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,224C672,235,768,181,864,160C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .footer-link {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .footer-link:hover {
+      color: rgba(255,255,255,0.9);
+    }
+
+    .copyright {
+      margin-top: 1rem;
+      opacity: 0.9;
+    }
+
+    /* Animation for cards */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .subject-card:nth-child(odd) {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .subject-card:nth-child(even) {
+      animation: float 7s ease-in-out infinite;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .welcome-heading {
+        font-size: 2.25rem;
+      }
+      
+      .welcome-subheading {
+        font-size: 1.1rem;
+      }
+      
+      .profile-container {
+        padding: 1.5rem;
+      }
+      
+      .profile-image-container {
+        width: 220px;
+        height: 260px;
+      }
+      
+      .subject-card {
+        padding: 1.5rem 1rem;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .welcome-heading {
+        font-size: 1.8rem;
+      }
+      
+      .profile-container {
+        flex-direction: column;
+      }
+      
+      .profile-image-container {
+        margin-bottom: 1.5rem;
+      }
+      
+      .contact-links {
+        justify-content: center;
+      }
+      
+      .subject-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+      <h1 class="welcome-heading">Welcome To The UmTech Institute</h1>
+      <p class="welcome-subheading">Advancing medical technology education through innovation and excellence in diagnostic imaging</p>
+      <button class="welcome-button pulse" onclick="document.getElementById('subjects').scrollIntoView({behavior:'smooth'});">
+        <i class="fas fa-book-open"></i> Explore Subjects
+      </button>
+    </section>
+
+    <!-- Profile Section -->
+    <div class="profile-container fade-in" id="profile" style="animation-delay: 0.2s">
+      <div class="profile-image-container">
+        <img src="profile.jpg.jpg" alt="Dr. AL-Kashif Umair" class="profile-image"
+        onerror="this.src='https://via.placeholder.com/236x320/667eea/ffffff?text=Dr.+AL-Kashif+Umair';this.onerror=null;"></a>
+      </div>
+
+      <div class="profile-content">
+        <a href="https://www.facebook.com/1MUmairUllah/" target="_blank" class="profile-name">Dr. AL-Kashif Umair</a>
+        <h2 class="profile-title">CEO & Lead Diagnostic Sonographer</h2>
+        <p class="profile-description">
+          With over 15 years of experience in diagnostic ultrasound and a passion for medical technology innovation, I'm dedicated to advancing radiology education through cutting-edge techniques and comprehensive training programs.
+        </p>
+        <div class="credentials">
+          <h3>Professional Credentials:</h3>
+          <ul class="credentials-list">
+            <li>Certified Diagnostic Sonographer (ARDMS)</li>
+            <li>Specialist in Abdominal and Vascular Sonography</li>
+            <li>MID, MS Diagnostic Ultrasound</li>
+            <li>Medical Imaging Researcher</li>
+            <li>Academic Lecturer and Trainer</li>
+          </ul>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:hafizumairm01@gmail.com" class="contact-link email-link">
+            <i class="fas fa-envelope"></i> Email Me
+          </a>
+          <a href="https://wa.me/923072441718" class="contact-link whatsapp-link">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+          <a href="student-form.html" target="_blank" class="contact-link form-link">
+            <i class="fas fa-user-graduate"></i> Enroll Now
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subjects Section -->
+    <section class="subject-section fade-in" id="subjects" style="animation-delay: 0.4s">
+      <h2 class="section-heading">Explore Diagnostic Imaging Modalities</h2>
+      <div class="subject-grid">
+        <a href="/Subjects/Ultrasound.html" class="subject-card" style="background: var(--gradient-3);">
+          <i class="fas fa-procedures"></i>
+          Ultrasound Imaging
+        </a>
+        <a href="/Subjects/xray.html" class="subject-card" style="background: var(--gradient-2);">
+          <i class="fas fa-x-ray"></i>
+          Radiography (X-ray)
+        </a>
+        <a href="/Subjects/MRI.html" class="subject-card" style="background: var(--gradient-7);">
+          <i class="fas fa-magnet"></i>
+          Magnetic Resonance
+        </a>
+        <a href="/Subjects/CT Scan.html" class="subject-card" style="background: var(--gradient-4);">
+          <i class="fas fa-brain"></i>
+          Computed Tomography
+        </a>
+        <a href="/Subjects/NM.html" class="subject-card" style="background: var(--gradient-5);">
+          <i class="fas fa-atom"></i>
+          Nuclear Medicine
+        </a>
+        <a href="/Subjects/fluoroscopy.html" class="subject-card" style="background: var(--gradient-6);">
+          <i class="fas fa-video"></i>
+          Fluoroscopy
+        </a>
+        <a href="/Subjects/dexa.html" class="subject-card" style="background: var(--gradient-8);">
+          <i class="fas fa-bone"></i>
+          Bone Densitometry
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#profile" class="footer-link">About Us</a>
+        <a href="#subjects" class="footer-link">Programs</a>
+        <a href="student-form.html" class="footer-link">Admissions</a>
+        <a href="mailto:hafizumairm01@gmail.com" class="footer-link">Contact</a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 The UmTech Institute. All rights reserved.<br>
+        Designed by Dr. AL-Kashif Umair
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

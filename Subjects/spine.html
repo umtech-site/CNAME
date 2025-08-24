@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spine X-Ray Guide - TheUmTech</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --primary:#2a6b9c;
+  --secondary:#f0f7ff;
+  --accent:#e63946;
+  --text:#333;
+  --shadow:rgba(0,0,0,0.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+body{background:#f9f9f9;color:var(--text);padding:20px;max-width:1200px;margin:auto;transition:0.3s;}
+body.dark-mode{background:#121212;color:#e0e0e0;}
+header{text-align:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid var(--primary);}
+h1{color:var(--primary);margin-bottom:0.5rem;text-align:center;}
+#controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:2rem;}
+.region-btn{padding:12px 20px;border:2px solid var(--primary);border-radius:8px;color:var(--primary);background:white;font-weight:bold;cursor:pointer;transition:0.3s;display:flex;align-items:center;gap:8px;}
+.region-btn:hover,.region-btn.active{background:var(--primary);color:white;}
+
+#info-panel{display:flex;flex-direction:column;gap:20px;background:white;padding:20px;border-radius:10px;box-shadow:0 4px 10px var(--shadow);transition:0.3s;}
+body.dark-mode #info-panel{background:#1e1e1e;box-shadow:none;}
+
+.box{background:var(--secondary);padding:15px 20px;border-radius:10px;box-shadow:0 4px 8px var(--shadow);transition:0.3s;color:var(--text);}
+body.dark-mode .box{background:#2a2a2a;color:#e0e0e0;}
+
+.box h3{margin-bottom:10px;border-bottom:1px solid #ccc;padding-bottom:5px;}
+
+/* Colored boxes */
+.box.anatomy{background:#d0ebff;color:#111;}
+.box.projection{background:linear-gradient(135deg,#fdd835,#1e88e5);color:#111;}
+.box.pathology{background:#ffd6d6;color:#111;}
+.box.criteria{background:#d4edda;color:#111;}
+.box.device{background:#ffe0b2;color:#111;}
+.box.safety{background:#fff3cd;color:#111;}
+
+/* Icons */
+.anatomy::before{content:"\f5b1";font-family:"Font Awesome 6 Free";margin-right:6px;color:#2a6b9c;font-weight:900;}
+.projection::before{content:"\f03e";font-family:"Font Awesome 6 Free";margin-right:6px;color:#555;font-weight:900;}
+.pathology::before{content:"\f0f1";font-family:"Font Awesome 6 Free";margin-right:6px;color:#b22222;font-weight:900;}
+.criteria::before{content:"\f00c";font-family:"Font Awesome 6 Free";margin-right:6px;color:#006400;font-weight:900;}
+.device::before{content:"\f0c3";font-family:"Font Awesome 6 Free";margin-right:6px;color:#8b4513;font-weight:900;}
+.safety::before{content:"\f071";font-family:"Font Awesome 6 Free";margin-right:6px;color:#ff8c00;font-weight:900;}
+
+#darkToggle{position:fixed;top:20px;right:30px;background:var(--primary);color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;z-index:1000;font-size:14px;}
+</style>
+</head>
+<body>
+
+<button id="darkToggle">🌙 Dark Mode</button>
+
+<header>
+<h1><i class="fas fa-spine"></i> Spine X-Ray Guide</h1>
+<p class="tagline">Select a spine region to view detailed anatomy, projections, pathology, devices, criteria, and safety tips.</p>
+</header>
+
+<section id="controls">
+<button class="region-btn" data-region="cervical"><i class="fas fa-circle-notch"></i> Cervical Spine</button>
+<button class="region-btn" data-region="thoracic"><i class="fas fa-circle"></i> Thoracic Spine</button>
+<button class="region-btn" data-region="lumbar"><i class="fas fa-square"></i> Lumbar Spine</button>
+<button class="region-btn" data-region="sacrum"><i class="fas fa-triangle"></i> Sacrum</button>
+<button class="region-btn" data-region="coccyx"><i class="fas fa-caret-down"></i> Coccyx</button>
+</section>
+
+<section id="info-panel">
+<p class="placeholder-text" style="text-align:center;color:#555;">Select a spine region from the menu above.</p>
+</section>
+
+<script>
+const spineData = {
+  cervical:{
+    anatomy:["Cervical vertebrae C1-C7","Intervertebral discs","Facet joints","Spinal canal & cord"],
+    projection:[
+      "Cervical spine AP view",
+      "Cervical spine lateral view",
+      "Cervical spine oblique view",
+      "Cervical spine hyperflexion and hyperextension view",
+      "Cervical spine open mouth view"
+    ],
+    pathology:["Degenerative disc disease","Fractures","Cervical spondylosis","Spinal stenosis","Tumors"],
+    criteria:["Proper alignment & exposure","Include C1-C7","No rotation","Visualize odontoid process"],
+    device:["Cervical collar","Surgical implants"],
+    safety:["Minimize exposure to thyroid & gonads"]
+  },
+  thoracic:{
+    anatomy:["Thoracic vertebrae T1-T12","Intervertebral discs","Rib articulations","Spinal canal & cord"],
+    projection:[
+      "Thoracic spine AP view",
+      "Thoracic spine lateral view",
+      "Thoracic spine oblique view",
+      "Swimmer’s view"
+    ],
+    pathology:["Compression fractures","Degenerative changes","Kyphosis","Tumors","Scoliosis"],
+    criteria:["Include T1-T12","Proper exposure","No rotation"],
+    device:["Surgical implants"],
+    safety:["Shield reproductive organs"]
+  },
+  lumbar:{
+    anatomy:["Lumbar vertebrae L1-L5","Intervertebral discs","Facet joints","Spinal canal & cord"],
+    projection:[
+      "Lumbar spine AP/PA view",
+      "Lumbar spine lateral view",
+      "Lumbar spine oblique view",
+      "Lumbar spine hyperflexion and hyperextension view"
+    ],
+    pathology:["Degenerative disc disease","Fractures","Spondylolisthesis","Spinal stenosis","Tumors"],
+    criteria:["Include L1-L5","Proper exposure","No rotation"],
+    device:["Surgical implants"],
+    safety:["Minimize exposure to gonads"]
+  },
+  sacrum:{
+    anatomy:["Sacral vertebrae S1-S5","Sacral canal","Sacral foramina","Facet joints"],
+    projection:[
+      "Sacrum AP/PA view",
+      "Sacrum lateral view"
+    ],
+    pathology:["Fractures","Sacralization","Tumors"],
+    criteria:["Proper alignment & exposure","Include sacral foramina"],
+    device:["Surgical implants"],
+    safety:["Shield reproductive organs"]
+  },
+  coccyx:{
+    anatomy:["Coccygeal vertebrae Co1-Co4","Sacrococcygeal junction"],
+    projection:[
+      "Coccyx AP view",
+      "Sacrum-Coccyx lateral view"
+    ],
+    pathology:["Fractures","Dislocations","Tumors"],
+    criteria:["Include coccyx & sacrococcygeal junction","Proper exposure"],
+    device:[],
+    safety:["Minimize exposure to gonads"]
+  }
+};
+
+const buttons=document.querySelectorAll('.region-btn');
+const panel=document.getElementById('info-panel');
+
+buttons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    buttons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const region=btn.dataset.region;
+    const data=spineData[region];
+    if(!data){panel.innerHTML="<p>No data available.</p>";return;}
+    let html='';
+    const sections=['anatomy','projection','pathology','criteria','device','safety'];
+    const titles={'anatomy':'Normal Anatomy','projection':'Projections','pathology':'Pathology','criteria':'Radiographic Criteria','device':'Medical Devices','safety':'Radiation Safety Tips'};
+    sections.forEach(sec=>{
+      if(data[sec] && data[sec].length>0){
+        html+=`<div class="box ${sec}"><h3 class="${sec}">${titles[sec]}</h3><ul>`;
+        data[sec].forEach(item=>html+=`<li>${item}</li>`);
+        html+=`</ul></div>`;
+      }
+    });
+    panel.innerHTML=html;
+  });
+});
+
+document.getElementById('darkToggle').addEventListener('click',()=>{
+  document.body.classList.toggle('dark-mode');
+  document.getElementById('darkToggle').textContent=document.body.classList.contains('dark-mode')?'☀️ Light Mode':'🌙 Dark Mode';
+});
+</script>
+
+</body>
+</html>

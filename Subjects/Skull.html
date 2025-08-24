@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skull X-Ray Guide - TheUmTech</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --primary:#2a6b9c;
+  --secondary:#f0f7ff;
+  --accent:#e63946;
+  --text:#333;
+  --shadow:rgba(0,0,0,0.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;}
+body{background:#f9f9f9;color:var(--text);padding:20px;max-width:1200px;margin:auto;transition:0.3s;}
+body.dark-mode{background:#121212;color:#e0e0e0;}
+header{text-align:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:2px solid var(--primary);}
+h1{color:var(--primary);margin-bottom:0.5rem;text-align:center;}
+#controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:2rem;}
+.region-btn{padding:12px 20px;border:2px solid var(--primary);border-radius:8px;color:var(--primary);background:white;font-weight:bold;cursor:pointer;transition:0.3s;display:flex;align-items:center;gap:8px;}
+.region-btn:hover,.region-btn.active{background:var(--primary);color:white;}
+
+#info-panel{display:flex;flex-direction:column;gap:20px;background:white;padding:20px;border-radius:10px;box-shadow:0 4px 10px var(--shadow);transition:0.3s;}
+body.dark-mode #info-panel{background:#1e1e1e;box-shadow:none;}
+
+.box{background:var(--secondary);padding:15px 20px;border-radius:10px;box-shadow:0 4px 8px var(--shadow);transition:0.3s;color:var(--text);}
+body.dark-mode .box{background:#2a2a2a;color:#e0e0e0;}
+
+.box h3{margin-bottom:10px;border-bottom:1px solid #ccc;padding-bottom:5px;}
+
+/* Colored boxes */
+.box.anatomy{background:#d0ebff;color:#111;}
+.box.projection{background:linear-gradient(135deg,#fdd835,#1e88e5);color:#111;}
+.box.pathology{background:#ffd6d6;color:#111;}
+.box.criteria{background:#d4edda;color:#111;}
+.box.device{background:#ffe0b2;color:#111;}
+.box.safety{background:#fff3cd;color:#111;}
+
+/* Icons */
+.anatomy::before{content:"\f5b1";font-family:"Font Awesome 6 Free";margin-right:6px;color:#2a6b9c;font-weight:900;}
+.projection::before{content:"\f03e";font-family:"Font Awesome 6 Free";margin-right:6px;color:#555;font-weight:900;}
+.pathology::before{content:"\f0f1";font-family:"Font Awesome 6 Free";margin-right:6px;color:#b22222;font-weight:900;}
+.criteria::before{content:"\f00c";font-family:"Font Awesome 6 Free";margin-right:6px;color:#006400;font-weight:900;}
+.device::before{content:"\f0c3";font-family:"Font Awesome 6 Free";margin-right:6px;color:#8b4513;font-weight:900;}
+.safety::before{content:"\f071";font-family:"Font Awesome 6 Free";margin-right:6px;color:#ff8c00;font-weight:900;}
+
+#darkToggle{position:fixed;top:20px;right:30px;background:var(--primary);color:white;padding:8px 14px;border:none;border-radius:6px;cursor:pointer;z-index:1000;font-size:14px;}
+</style>
+</head>
+<body>
+
+<button id="darkToggle">🌙 Dark Mode</button>
+
+<header>
+<h1><i class="fas fa-skull"></i> Skull X-Ray Guide</h1>
+<p class="tagline">Select a skull region to view detailed anatomy, projections, pathology, devices, criteria, and safety tips.</p>
+</header>
+
+<section id="controls">
+<button class="region-btn" data-region="skull"><i class="fas fa-brain"></i> Skull</button>
+<button class="region-btn" data-region="sinuses"><i class="fas fa-circle-notch"></i> Paranasal Sinuses</button>
+<button class="region-btn" data-region="zygoma"><i class="fas fa-smile"></i> Zygomatic Arches</button>
+<button class="region-btn" data-region="tmj"><i class="fas fa-teeth"></i> TMJ & Mastoids</button>
+<button class="region-btn" data-region="orbits"><i class="fas fa-eye"></i> Orbits</button>
+<button class="region-btn" data-region="nasal"><i class="fas fa-nose"></i> Nasal Bones</button>
+</section>
+
+<section id="info-panel">
+<p class="placeholder-text" style="text-align:center;color:#555;">Select a skull region from the menu above.</p>
+</section>
+
+<script>
+const skullData = {
+  skull:{
+    anatomy:["Frontal, parietal, occipital, temporal, sphenoid, ethmoid bones","Cranial sutures and fontanelles","Mastoid air cells"],
+    projection:["Head PA/AP view","Head lateral view","Submentovertex (SMV) view","Towne view","Schuller view"],
+    pathology:["Cranial fractures","Intracranial calcifications","Congenital cranial anomalies"],
+    criteria:["Proper symmetry","Correct exposure","Patient immobilization"],
+    device:["External fixation devices","Surgical plates or screws"],
+    safety:["ALARA principle","Lead shielding for eyes and thyroid"]
+  },
+  sinuses:{
+    anatomy:["Frontal, maxillary, ethmoid, sphenoid sinuses","Sinus septa and ostia"],
+    projection:["Sinus PA view","Sinus lateral view","Caldwell view","Waters view"],
+    pathology:["Sinusitis","Mucosal thickening","Neoplasms"],
+    criteria:["Symmetry","Proper exposure for sinus detail"],
+    device:["Surgical plates if post-op"],
+    safety:["ALARA principle","Lead thyroid shielding"]
+  },
+  zygoma:{
+    anatomy:["Zygomatic bones","Zygomatic arches","Zygomaticofrontal sutures"],
+    projection:["Zygomatic arch AP view","Zygomatic arch lateral view","Oblique view (SMV)"],
+    pathology:["Zygomatic fractures","Arthritic changes"],
+    criteria:["Proper alignment","Symmetry"],
+    device:["Surgical plates if post-op"],
+    safety:["ALARA principle"]
+  },
+  tmj:{
+    anatomy:["Temporomandibular joint: mandibular condyle, mandibular fossa","Articular disc","Joint capsule"],
+    projection:["Modified Stenvers view","Mayer view","Rhese-Goalwin view","TMJ AP/oblique views"],
+    pathology:["TMJ dislocation","Arthritis","Fractures of condyle","Neoplasm"],
+    criteria:["Open/closed mouth positioning","Symmetry of joint space"],
+    device:["Dental hardware","External fixation if post-op"],
+    safety:["ALARA principle","Lead thyroid shielding"]
+  },
+  orbits:{
+    anatomy:["Orbital walls","Orbital roof and floor","Optic canal"],
+    projection:["Orbit PA view","Orbit lateral view","Caldwell view","Waters view"],
+    pathology:["Fractures","Neoplasm","Orbital floor blowout fracture"],
+    criteria:["Symmetry","Proper exposure for orbital detail"],
+    device:["Surgical plates if post-op"],
+    safety:["ALARA principle"]
+  },
+  nasal:{
+    anatomy:["Nasal bones, nasal septum"],
+    projection:["Nasal bone axial view","Nasal bone lateral view"],
+    pathology:["Fractures","Deviated septum"],
+    criteria:["Proper alignment","Exposure for nasal bones"],
+    device:["External fixation if post-op"],
+    safety:["ALARA principle","Lead shielding"]
+  }
+};
+
+const buttons=document.querySelectorAll('.region-btn');
+const panel=document.getElementById('info-panel');
+
+buttons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    buttons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const region=btn.dataset.region;
+    const data=skullData[region];
+    if(!data){panel.innerHTML="<p>No data available.</p>";return;}
+    let html='';
+    const sections=['anatomy','projection','pathology','criteria','device','safety'];
+    const titles={'anatomy':'Normal Anatomy','projection':'Projections','pathology':'Pathology','criteria':'Radiographic Criteria','device':'Medical Devices','safety':'Radiation Safety Tips'};
+    sections.forEach(sec=>{
+      if(data[sec] && data[sec].length>0){
+        html+=`<div class="box ${sec}"><h3 class="${sec}">${titles[sec]}</h3><ul>`;
+        data[sec].forEach(item=>html+=`<li>${item}</li>`);
+        html+=`</ul></div>`;
+      }
+    });
+    panel.innerHTML=html;
+  });
+});
+
+document.getElementById('darkToggle').addEventListener('click',()=>{
+  document.body.classList.toggle('dark-mode');
+  document.getElementById('darkToggle').textContent=document.body.classList.contains('dark-mode')?'☀️ Light Mode':'🌙 Dark Mode';
+});
+</script>
+
+</body>
+</html>
