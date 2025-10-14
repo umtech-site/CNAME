@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="The Umair Medics - Premier Diagnostic Imaging Education">
+  <meta name="keywords" content="diagnostic imaging, ultrasound, x-ray, MRI, CT scan, medical education">
+  <title>TheUmTech | Advanced Diagnostic Imaging Institute</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #1a237e;
+      --primary-light: #534bae;
+      --secondary-color: #ff6f61;
+      --accent-color: #25D366;
+      --error-color: #d44638;
+      --light-bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-color: #2d3748;
+      --text-light: #4a5568;
+      --brand-color: #6a1b9a;
+      --brand-light: #9c27b0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #ff6b6b 0%, #ff9a3d 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      --gradient-6: linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
+      --gradient-7: linear-gradient(135deg, #5ee7df 0%, #b490ca 100%);
+      --gradient-8: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+      --gradient-9: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      --gradient-10: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+      --gradient-11: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+      --gradient-12: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+      --gradient-13: linear-gradient(135deg, #a3bded 0%, #6991c7 100%);
+      --gradient-14: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-15: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+      --gradient-16: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+      
+      /* Dark mode variables */
+      --dark-bg: #0f172a;
+      --dark-card-bg: #1e293b;
+      --dark-text: #e2e8f0;
+      --dark-text-light: #94a3b8;
+      --dark-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+      color: var(--text-color);
+      line-height: 1.7;
+      padding: 0;
+      min-height: 100vh;
+      transition: all 0.3s ease;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background: linear-gradient(120deg, #0f172a 0%, #1e293b 100%);
+      color: var(--dark-text);
+    }
+
+    body.dark-mode .main-content .container {
+      background: transparent;
+    }
+
+    body.dark-mode .profile-container {
+      background: var(--dark-card-bg);
+      color: var(--dark-text);
+      box-shadow: var(--dark-shadow);
+    }
+
+    body.dark-mode .profile-description,
+    body.dark-mode .credentials,
+    body.dark-mode .credentials h3,
+    body.dark-mode .credentials-list li {
+      color: var(--dark-text-light);
+    }
+
+    body.dark-mode .credentials {
+      background: rgba(30, 41, 59, 0.7);
+      border-left: 5px solid var(--primary-light);
+    }
+
+    body.dark-mode .section-heading {
+      color: var(--dark-text);
+    }
+
+    body.dark-mode footer {
+      background: var(--gradient-1);
+    }
+
+    /* Dark Mode Toggle */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10000;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+    }
+
+    body.dark-mode .dark-mode-toggle {
+      background: rgba(30, 41, 59, 0.9);
+      color: var(--dark-text);
+    }
+
+    .dark-mode-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Password Overlay Styles */
+    #password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+      overflow: hidden;
+    }
+
+    .password-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      max-width: 450px;
+      width: 90%;
+      animation: fadeIn 0.8s ease-in;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    body.dark-mode .password-container {
+      background: rgba(30, 41, 59, 0.95);
+      color: var(--dark-text);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark-mode .password-title {
+      color: var(--dark-text);
+    }
+
+    body.dark-mode .password-subtitle {
+      color: var(--dark-text-light);
+    }
+
+    body.dark-mode .password-input {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--dark-text);
+      border: 2px solid #374151;
+    }
+
+    body.dark-mode .password-input:focus {
+      border-color: var(--primary-light);
+    }
+
+    body.dark-mode .password-input::placeholder {
+      color: var(--dark-text-light);
+    }
+
+    .password-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      transform: rotate(45deg);
+      animation: shine 3s infinite linear;
+    }
+
+    .password-logo {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      animation: pulse 2s infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    body.dark-mode .password-logo {
+      color: var(--primary-light);
+    }
+
+    .password-title {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .password-subtitle {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .password-input-container {
+      position: relative;
+      margin-bottom: 1.5rem;
+      z-index: 1;
+    }
+
+    .password-input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 50px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      outline: none;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(5px);
+    }
+
+    .password-input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+      transform: scale(1.02);
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-light);
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    .password-toggle:hover {
+      color: var(--primary-color);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    body.dark-mode .password-toggle {
+      color: var(--dark-text-light);
+    }
+
+    body.dark-mode .password-toggle:hover {
+      color: var(--primary-light);
+    }
+
+    .password-submit {
+      width: 100%;
+      padding: 1rem;
+      background: var(--gradient-1);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .password-submit::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .password-submit:hover::before {
+      left: 100%;
+    }
+
+    .password-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .password-error {
+      color: var(--error-color);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      display: none;
+      animation: shake 0.5s ease-in-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Animated Background Elements */
+    .floating-shapes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.7;
+      filter: blur(1px);
+      animation: float 15s infinite linear;
+    }
+
+    .flower {
+      position: absolute;
+      animation: float 20s infinite linear;
+      opacity: 0.7;
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Dangerous Wolves */
+    .wolf {
+      position: absolute;
+      font-size: 3rem;
+      color: #8B4513;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      animation: wolfMove 25s infinite linear, wolfHowl 8s infinite;
+      z-index: 1;
+      opacity: 0.8;
+    }
+
+    .wolf::before {
+      content: '🐺';
+    }
+
+    .wolf-eye {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #ff0000;
+      border-radius: 50%;
+      top: 12px;
+      left: 16px;
+      animation: wolfEye 3s infinite alternate;
+    }
+
+    /* Gradient Background Animation */
+    .gradient-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(-45deg, #667eea, #764ba2, #ff6b6b, #ff9a3d, #4facfe, #00f2fe);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      z-index: 0;
+    }
+
+    /* Main Content Styles */
+    .main-content {
+      display: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .welcome-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeIn 1s ease-in;
+      padding: 3rem 1rem;
+      background: var(--gradient-1);
+      border-radius: 20px;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .welcome-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 20%);
+      background-size: 20px 20px;
+      transform: rotate(30deg);
+      pointer-events: none;
+    }
+
+    .welcome-heading {
+      font-size: 2.75rem;
+      color: white;
+      margin-bottom: 1.25rem;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.75rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .welcome-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 5px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 3px;
+    }
+
+    .welcome-subheading {
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 2rem;
+      font-size: 1.25rem;
+      font-weight: 400;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .welcome-button {
+      padding: 1rem 2.5rem;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .welcome-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.3);
+    }
+
+    .welcome-button:active {
+      transform: translateY(1px);
+    }
+
+    .welcome-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .welcome-button:hover::before { 
+      left: 100%; 
+    }
+
+    .profile-container {
+      display: flex;
+      flex-direction: column;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: var(--shadow-md);
+      padding: 2.5rem;
+      margin: 2rem auto;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 1000px;
+      overflow: hidden;
+      position: relative;
+      border-left: 5px solid var(--brand-color);
+    }
+
+    .profile-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: var(--gradient-2);
+      border-radius: 0 0 0 100px;
+      z-index: 0;
+    }
+
+    .profile-container:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+
+    @media (min-width: 768px) {
+      .profile-container { 
+        flex-direction: row; 
+        gap: 2.5rem;
+      }
+    }
+
+    .profile-image-container {
+      width: 280px;
+      height: 320px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 0 auto;
+      background: var(--gradient-3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-md);
+      border: 4px solid white;
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-image-container:hover .profile-image {
+      transform: scale(1.05);
+    }
+
+    .profile-content { 
+      flex: 1; 
+      padding-top: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-name {
+      color: var(--brand-color);
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+      font-size: 1.75rem;
+      font-weight: 700;
+      display: inline-block;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    body.dark-mode .profile-name {
+      color: var(--brand-light);
+    }
+
+    .profile-name::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--gradient-2);
+      transition: width 0.3s ease;
+    }
+
+    .profile-name:hover::after {
+      width: 100%;
+    }
+
+    .profile-name:hover {
+      color: var(--primary-color);
+    }
+
+    body.dark-mode .profile-name:hover {
+      color: var(--primary-light);
+    }
+
+    .profile-title {
+      color: var(--secondary-color);
+      margin-bottom: 1.25rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .profile-description {
+      margin-bottom: 1.5rem;
+      color: var(--text-light);
+      font-size: 1.05rem;
+    }
+
+    .credentials {
+      background: linear-gradient(to right, rgba(248, 249, 250, 0.7), rgba(248, 249, 250, 0.9));
+      padding: 1.25rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      border-left: 5px solid var(--primary-color);
+      backdrop-filter: blur(5px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .credentials h3 {
+      margin-bottom: 0.75rem;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    body.dark-mode .credentials h3 {
+      color: var(--primary-light);
+    }
+
+    .credentials-list {
+      list-style-type: none;
+    }
+
+    .credentials-list li {
+      padding-left: 1.75rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      font-size: 1rem;
+    }
+
+    .credentials-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0.5rem;
+      color: var(--secondary-color);
+      font-weight: bold;
+    }
+
+    .contact-links {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-link:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .contact-link i {
+      margin-right: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .email-link { background: var(--gradient-2); }
+    .email-link:hover { background: linear-gradient(135deg, #e55a50 0%, #e58c3d 100%); }
+
+    .whatsapp-link { background: var(--gradient-4); }
+    .whatsapp-link:hover { background: linear-gradient(135deg, #3bd68c 0%, #31d4c9 100%); }
+
+    .form-link { background: var(--gradient-1); }
+    .form-link:hover { background: linear-gradient(135deg, #5a73e0 0%, #694d9e 100%); }
+
+    .fade-in { 
+      animation: fadeIn 0.8s ease-in forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .subject-section {
+      padding: 2rem 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0 1rem;
+    }
+
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gradient-1);
+      border-radius: 3px;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .subject-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-radius: 16px;
+      font-size: 1.15rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+      box-shadow: var(--shadow-md);
+      transition: all 0.3s ease;
+      min-height: 120px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .subject-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      z-index: -1;
+      transition: opacity 0.3s ease;
+    }
+
+    .subject-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.1);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .subject-card:hover::after {
+      opacity: 1;
+    }
+
+    .subject-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .subject-card:hover i {
+      transform: scale(1.2);
+    }
+
+    footer {
+      background: var(--gradient-1);
+      color: white;
+      text-align: center;
+      padding: 3rem 0;
+      font-size: 1rem;
+      margin-top: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,224C672,235,768,181,864,160C960,139,1056,149,1152,165.3C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.1;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .footer-link {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    .footer-link:hover::after {
+      width: 100%;
+    }
+
+    .footer-link:hover {
+      color: rgba(255,255,255,0.9);
+    }
+
+    .copyright {
+      margin-top: 1rem;
+      opacity: 0.9;
+    }
+
+    /* Animation for cards */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .subject-card:nth-child(odd) {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .subject-card:nth-child(even) {
+      animation: float 7s ease-in-out infinite;
+    }
+
+    /* New Animations */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Wolf Animations */
+    @keyframes wolfMove {
+      0% { transform: translateX(-100px) translateY(0) rotate(0deg); }
+      25% { transform: translateX(calc(100vw - 100px)) translateY(100px) rotate(90deg); }
+      50% { transform: translateX(calc(100vw - 100px)) translateY(calc(100vh - 100px)) rotate(180deg); }
+      75% { transform: translateX(-100px) translateY(calc(100vh - 100px)) rotate(270deg); }
+      100% { transform: translateX(-100px) translateY(0) rotate(360deg); }
+    }
+
+    @keyframes wolfHowl {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.2) rotate(-5deg); }
+    }
+
+    @keyframes wolfEye {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .welcome-heading {
+        font-size: 2.25rem;
+      }
+      
+      .welcome-subheading {
+        font-size: 1.1rem;
+      }
+      
+      .profile-container {
+        padding: 1.5rem;
+      }
+      
+      .profile-image-container {
+        width: 220px;
+        height: 260px;
+      }
+      
+      .subject-card {
+        padding: 1.5rem 1rem;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+      
+      .password-container {
+        padding: 2rem;
+      }
+      
+      .wolf {
+        font-size: 2rem;
+      }
+
+      .dark-mode-toggle {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .welcome-heading {
+        font-size: 1.8rem;
+      }
+      
+      .profile-container {
+        flex-direction: column;
+      }
+      
+      .profile-image-container {
+        margin-bottom: 1.5rem;
+      }
+      
+      .contact-links {
+        justify-content: center;
+      }
+      
+      .subject-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .password-container {
+        padding: 1.5rem;
+      }
+      
+      .wolf {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Dark Mode Toggle -->
+  <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <!-- Password Overlay -->
+  <div id="password-overlay">
+    <div class="gradient-bg"></div>
+    <div class="floating-shapes" id="floating-shapes"></div>
+    <div class="password-container">
+      <div class="password-logo">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h2 class="password-title">Secure Access Required</h2>
+      <p class="password-subtitle">Please enter the password to access The Umair Medics website</p>
+      
+      <div class="password-input-container">
+        <input type="password" id="password-input" class="password-input" placeholder="Enter password">
+        <button type="button" class="password-toggle" id="password-toggle">
+          <i class="fas fa-eye"></i>
+        </button>
+      </div>
+      
+      <button type="button" class="password-submit" id="password-submit">Access Website</button>
+      
+      <div class="password-error" id="password-error">
+        <i class="fas fa-exclamation-circle"></i> Incorrect password. Please try again.
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content (Hidden until password is entered) -->
+  <div class="main-content" id="main-content">
+    <div class="container">
+      <!-- Welcome Section -->
+      <section class="welcome-section">
+        <h1 class="welcome-heading">Welcome To The Umair Medics</h1>
+        <p class="welcome-subheading">Advancing medical technology education through innovation and excellence in diagnostic imaging</p>
+        <button class="welcome-button pulse" onclick="document.getElementById('subjects').scrollIntoView({behavior:'smooth'});">
+          <i class="fas fa-book-open"></i> Explore Subjects
+        </button>
+      </section>
+
+      <!-- Profile Section -->
+      <div class="profile-container fade-in" id="profile" style="animation-delay: 0.2s">
+        <div class="profile-image-container">
+          <img src="profile.jpg.png" alt="Dr. AL-Kashif Umair" class="profile-image"
+          onerror="this.src='https://via.placeholder.com/236x320/667eea/ffffff?text=Dr.+AL-Kashif+Umair';this.onerror=null;"></a>
+        </div>
+
+        <div class="profile-content">
+          <a href="https://www.facebook.com/1MUmairUllah/" target="_blank" class="profile-name">Dr. AL-Kashif Umair</a>
+          <h2 class="profile-title">CEO & Lead Diagnostic Sonographer</h2>
+          <p class="profile-description">
+            With over 15 years of experience in diagnostic ultrasound and a passion for medical technology innovation, I'm dedicated to advancing radiology education through cutting-edge techniques and comprehensive training programs.
+          </p>
+          <div class="credentials">
+            <h3>Professional Credentials:</h3>
+            <ul class="credentials-list">
+              <li>Certified Diagnostic Sonographer (ARDMS)</li>
+              <li>Specialist in Abdominal and Vascular Sonography</li>
+              <li>MID, MS Diagnostic Ultrasound</li>
+              <li>Medical Imaging Researcher</li>
+              <li>Academic Lecturer and Trainer</li>
+            </ul>
+          </div>
+          <div class="contact-links">
+            <a href="mailto:hafizumairm01@gmail.com" class="contact-link email-link">
+              <i class="fas fa-envelope"></i> Email Me
+            </a>
+            <a href="https://wa.me/923072441718" class="contact-link whatsapp-link">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="student-form.html" target="_blank" class="contact-link form-link">
+              <i class="fas fa-user-graduate"></i> Enroll Now
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subjects Section -->
+      <section class="subject-section fade-in" id="subjects" style="animation-delay: 0.4s">
+        <h2 class="section-heading">Explore Diagnostic Imaging Modalities</h2>
+        <div class="subject-grid">
+          <a href="/sdfgUltrasound.html" class="subject-card" style="background: var(--gradient-3);">
+            <i class="fas fa-procedures"></i>
+            Ultrasound Imaging
+          </a>
+          <a href="/Subjects/xray.html" class="subject-card" style="background: var(--gradient-2);">
+            <i class="fas fa-x-ray"></i>
+            Radiography (X-ray)
+          </a>
+          <a href="/subMRI.html" class="subject-card" style="background: var(--gradient-7);">
+            <i class="fas fa-magnet"></i>
+            Magnetic Resonance
+          </a>
+          <a href="/Subjects/CT Scan.html" class="subject-card" style="background: var(--gradient-4);">
+            <i class="fas fa-brain"></i>
+            Computed Tomography
+          </a>
+          <a href="/Subjects/NM.html" class="subject-card" style="background: var(--gradient-5);">
+            <i class="fas fa-atom"></i>
+            Nuclear Medicine
+          </a>
+          <a href="/Subjects/fluoroscopy.html" class="subject-card" style="background: var(--gradient-6);">
+            <i class="fas fa-video"></i>
+            Fluoroscopy
+          </a>
+          <a href="/Subjects/dexa.html" class="subject-card" style="background: var(--gradient-8);">
+            <i class="fas fa-bone"></i>
+            Bone Densitometry
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#profile" class="footer-link">About Us</a>
+          <a href="#subjects" class="footer-link">Programs</a>
+          <a href="student-form.html" class="footer-link">Admissions</a>
+          <a href="mailto:hafizumairm01@gmail.com" class="footer-link">Contact</a>
+        </div>
+        <div class="copyright">
+          &copy; 2025 The UmTech Institute. All rights reserved.<br>
+          Designed by Dr. AL-Kashif Umair
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const passwordOverlay = document.getElementById('password-overlay');
+      const mainContent = document.getElementById('main-content');
+      const passwordInput = document.getElementById('password-input');
+      const passwordSubmit = document.getElementById('password-submit');
+      const passwordToggle = document.getElementById('password-toggle');
+      const passwordError = document.getElementById('password-error');
+      const floatingShapes = document.getElementById('floating-shapes');
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      
+      // Dark Mode Functionality
+      function initDarkMode() {
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (isDarkMode || (!localStorage.getItem('darkMode') && prefersDark)) {
+          document.body.classList.add('dark-mode');
+          darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        darkModeToggle.addEventListener('click', function() {
+          document.body.classList.toggle('dark-mode');
+          const isDark = document.body.classList.contains('dark-mode');
+          localStorage.setItem('darkMode', isDark);
+          darkModeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+      }
+      
+      initDarkMode();
+      
+      // Create animated background elements
+      function createBackgroundElements() {
+        // Create floating shapes
+        for (let i = 0; i < 15; i++) {
+          const shape = document.createElement('div');
+          shape.classList.add('shape');
+          
+          // Random properties
+          const size = Math.random() * 100 + 20;
+          const left = Math.random() * 100;
+          const top = Math.random() * 100;
+          const duration = Math.random() * 20 + 10;
+          const delay = Math.random() * 5;
+          const gradientIndex = Math.floor(Math.random() * 16) + 1;
+          
+          shape.style.width = `${size}px`;
+          shape.style.height = `${size}px`;
+          shape.style.left = `${left}%`;
+          shape.style.top = `${top}%`;
+          shape.style.animationDuration = `${duration}s`;
+          shape.style.animationDelay = `${delay}s`;
+          shape.style.background = `var(--gradient-${gradientIndex})`;
+          
+          floatingShapes.appendChild(shape);
+        }
+        
+        // Create animated flowers
+        for (let i = 0; i < 10; i++) {
+          const flower = document.createElement('div');
+          flower.classList.add('flower');
+          flower.innerHTML = '<i class="fas fa-seedling"></i>';
+          
+          // Random properties
+          const left = Math.random() * 100;
+          const top = Math.random() * 100;
+          const duration = Math.random() * 25 + 15;
+          const delay = Math.random() * 10;
+          const rotation = Math.random() * 360;
+          
+          flower.style.left = `${left}%`;
+          flower.style.top = `${top}%`;
+          flower.style.animationDuration = `${duration}s`;
+          flower.style.animationDelay = `${delay}s`;
+          flower.style.transform = `rotate(${rotation}deg)`;
+          
+          floatingShapes.appendChild(flower);
+        }
+        
+        // Create dangerous wolves
+        for (let i = 0; i < 5; i++) {
+          const wolf = document.createElement('div');
+          wolf.classList.add('wolf');
+          
+          // Random properties
+          const duration = Math.random() * 30 + 20;
+          const delay = Math.random() * 15;
+          
+          wolf.style.animationDuration = `${duration}s`;
+          wolf.style.animationDelay = `${delay}s`;
+          
+          // Add glowing red eyes
+          const eye = document.createElement('div');
+          eye.classList.add('wolf-eye');
+          wolf.appendChild(eye);
+          
+          floatingShapes.appendChild(wolf);
+        }
+      }
+      
+      createBackgroundElements();
+      
+      // Check if user is already authenticated
+      if (sessionStorage.getItem('authenticated') === 'true') {
+        passwordOverlay.style.display = 'none';
+        mainContent.style.display = 'block';
+        return;
+      }
+      
+      // Toggle password visibility
+      passwordToggle.addEventListener('click', function() {
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+        } else {
+          passwordInput.type = 'password';
+          passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
+        }
+      });
+      
+      // Submit password
+      passwordSubmit.addEventListener('click', function() {
+        checkPassword();
+      });
+      
+      // Allow Enter key to submit
+      passwordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          checkPassword();
+        }
+      });
+      
+      function checkPassword() {
+        const enteredPassword = passwordInput.value.trim();
+        
+        if (enteredPassword === '3.33') {
+          // Correct password
+          sessionStorage.setItem('authenticated', 'true');
+          passwordOverlay.style.opacity = '0';
+          
+          setTimeout(function() {
+            passwordOverlay.style.display = 'none';
+            mainContent.style.display = 'block';
+          }, 500);
+        } else {
+          // Incorrect password
+          passwordError.style.display = 'block';
+          passwordInput.focus();
+          passwordInput.select();
+          
+          // Hide error after 3 seconds
+          setTimeout(function() {
+            passwordError.style.display = 'none';
+          }, 3000);
+        }
+      }
+      
+      // Focus on password input when page loads
+      passwordInput.focus();
+    });
+  </script>
+</body>
+</html>
