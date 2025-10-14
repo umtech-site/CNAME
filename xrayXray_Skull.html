@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skull Anatomy Study Cards</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #1abc9c;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, #3498db, #2c3e50);
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --card-height: 180px;
+        }
+
+        .theme-blue {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #1abc9c;
+            --header-bg: linear-gradient(135deg, #3498db, #2c3e50);
+        }
+
+        .theme-green {
+            --primary-color: #27ae60;
+            --secondary-color: #2ecc71;
+            --accent-color: #16a085;
+            --header-bg: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .theme-purple {
+            --primary-color: #9b59b6;
+            --secondary-color: #8e44ad;
+            --accent-color: #e74c3c;
+            --header-bg: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .theme-orange {
+            --primary-color: #e67e22;
+            --secondary-color: #d35400;
+            --accent-color: #f39c12;
+            --header-bg: linear-gradient(135deg, #e67e22, #d35400);
+        }
+
+        .night-mode {
+            --primary-color: #9b59b6;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --text-color: #ecf0f1;
+            --bg-color: #2c3e50;
+            --card-bg: #34495e;
+            --header-bg: linear-gradient(135deg, #9b59b6, #34495e);
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 10px;
+            transition: all 0.3s ease;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: var(--header-bg);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header p {
+            margin: 5px 0 0;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .theme-selector, .zoom-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .theme-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .theme-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-icon.active {
+            border-color: white;
+            box-shadow: 0 0 0 2px var(--accent-color);
+        }
+
+        .theme-blue-icon {
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+        }
+
+        .theme-green-icon {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+
+        .theme-purple-icon {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+
+        .theme-orange-icon {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+        }
+
+        .night-mode-icon {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .zoom-level {
+            background: var(--card-bg);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            font-size: 0.8rem;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            padding: 5px;
+            flex-grow: 1;
+        }
+
+        .section {
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            background: var(--header-bg);
+            color: white;
+            padding: 8px;
+            border-radius: 6px 6px 0 0;
+            margin: 0 0 8px 0;
+            font-size: 1rem;
+            text-align: center;
+            grid-column: 1 / -1;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: var(--card-height);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            padding: 8px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .card-content {
+            padding: 8px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 70px;
+            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-style: italic;
+            font-size: 0.7rem;
+            border-radius: 4px;
+            margin-bottom: 6px;
+            flex-shrink: 0;
+        }
+
+        .night-mode .card-image {
+            background: linear-gradient(135deg, #4a5f7a, #3a4a5f);
+            color: #bdc3c7;
+        }
+
+        .card-details {
+            font-size: 0.75rem;
+            line-height: 1.3;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .card-details p {
+            margin: 0 0 4px 0;
+        }
+
+        .zoom-1 { transform: scale(0.7); }
+        .zoom-2 { transform: scale(0.85); }
+        .zoom-3 { transform: scale(1); }
+        .zoom-4 { transform: scale(1.15); }
+        .zoom-5 { transform: scale(1.3); }
+
+        /* Custom scrollbar for webkit browsers */
+        .container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .card-details::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .card-details::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 2px;
+        }
+
+        .card-details::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .theme-selector, .zoom-controls {
+                justify-content: center;
+            }
+            
+            :root {
+                --card-height: 160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+            
+            :root {
+                --card-height: 150px;
+            }
+        }
+    </style>
+</head>
+<body class="theme-blue">
+    <div class="header">
+        <h1>Skull Anatomy Study Cards</h1>
+        <p>"Allah is the Light of the heavens and the earth..." - Surah An-Nur 24:35</p>
+    </div>
+
+    <div class="controls">
+        <div class="theme-selector">
+            <div class="theme-icon theme-blue-icon active" data-theme="theme-blue"></div>
+            <div class="theme-icon theme-green-icon" data-theme="theme-green"></div>
+            <div class="theme-icon theme-purple-icon" data-theme="theme-purple"></div>
+            <div class="theme-icon theme-orange-icon" data-theme="theme-orange"></div>
+            <div class="theme-icon night-mode-icon" data-theme="night-mode">NM</div>
+        </div>
+        <div class="zoom-controls">
+            <button id="zoom-out">Zoom Out</button>
+            <div class="zoom-level">Zoom: 100%</div>
+            <button id="zoom-in">Zoom In</button>
+        </div>
+    </div>
+
+    <div class="container" id="card-container">
+        <!-- Cranial Bones Section -->
+        <h2 class="section-title">Cranial Region (8 bones)</h2>
+        
+        <div class="card">
+            <div class="card-header">Frontal Bone</div>
+            <div class="card-content">
+                <div class="card-image">Frontal Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Forehead region</p>
+                    <p><strong>Function:</strong> Protects frontal lobes, forms upper orbits</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Parietal Bones (2)</div>
+            <div class="card-content">
+                <div class="card-image">Parietal Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Sides and roof of cranium</p>
+                    <p><strong>Function:</strong> Forms cranial vault, protects parietal lobes</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Temporal Bones (2)</div>
+            <div class="card-content">
+                <div class="card-image">Temporal Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Sides and base of skull</p>
+                    <p><strong>Function:</strong> Houses ear structures, forms TMJ</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Occipital Bone</div>
+            <div class="card-content">
+                <div class="card-image">Occipital Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Posterior skull base</p>
+                    <p><strong>Function:</strong> Forms posterior fossa, contains foramen magnum</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Sphenoid Bone</div>
+            <div class="card-content">
+                <div class="card-image">Sphenoid Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Base of skull</p>
+                    <p><strong>Function:</strong> Connects cranial and facial bones</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Ethmoid Bone</div>
+            <div class="card-content">
+                <div class="card-image">Ethmoid Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Between orbits</p>
+                    <p><strong>Function:</strong> Forms nasal cavity, medial orbit wall</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Facial Bones Section -->
+        <h2 class="section-title">Facial Region (14 bones)</h2>
+        
+        <div class="card">
+            <div class="card-header">Maxilla Bones (2)</div>
+            <div class="card-content">
+                <div class="card-image">Maxilla Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Upper jaw</p>
+                    <p><strong>Function:</strong> Forms upper jaw, contains upper teeth</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Zygomatic Bones (2)</div>
+            <div class="card-content">
+                <div class="card-image">Zygomatic Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Cheekbones</p>
+                    <p><strong>Function:</strong> Forms cheek prominences, part of orbit</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Nasal Bones (2)</div>
+            <div class="card-content">
+                <div class="card-image">Nasal Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Bridge of nose</p>
+                    <p><strong>Function:</strong> Forms nasal bridge, protects nasal cavity</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Lacrimal Bones (2)</div>
+            <div class="card-content">
+                <div class="card-image">Lacrimal Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Medial orbit wall</p>
+                    <p><strong>Function:</strong> Contains lacrimal fossa for tear drainage</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Palatine Bones (2)</div>
+            <div class="card-content">
+                <div class="card-image">Palatine Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Posterior hard palate</p>
+                    <p><strong>Function:</strong> Forms posterior hard palate</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Inferior Nasal Conchae (2)</div>
+            <div class="card-content">
+                <div class="card-image">Conchae Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Nasal cavity walls</p>
+                    <p><strong>Function:</strong> Increases nasal surface area</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Vomer Bone</div>
+            <div class="card-content">
+                <div class="card-image">Vomer Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Nasal septum</p>
+                    <p><strong>Function:</strong> Forms inferior nasal septum</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Mandible Bone</div>
+            <div class="card-content">
+                <div class="card-image">Mandible Diagram</div>
+                <div class="card-details">
+                    <p><strong>Location:</strong> Lower jaw</p>
+                    <p><strong>Function:</strong> Only movable skull bone, contains lower teeth</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme switching functionality
+        const themeIcons = document.querySelectorAll('.theme-icon');
+        
+        themeIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                // Remove active class from all icons
+                themeIcons.forEach(i => i.classList.remove('active'));
+                
+                // Add active class to clicked icon
+                this.classList.add('active');
+                
+                // Get the theme from data attribute
+                const theme = this.getAttribute('data-theme');
+                
+                // Remove all theme classes from body
+                document.body.classList.remove('theme-blue', 'theme-green', 'theme-purple', 'theme-orange', 'night-mode');
+                
+                // Add the selected theme class
+                document.body.classList.add(theme);
+            });
+        });
+
+        // Zoom functionality
+        let currentZoom = 3;
+        const zoomLevels = ['70%', '85%', '100%', '115%', '130%'];
+        const container = document.getElementById('card-container');
+        const zoomDisplay = document.querySelector('.zoom-level');
+
+        document.getElementById('zoom-in').addEventListener('click', function() {
+            if (currentZoom < 5) {
+                currentZoom++;
+                updateZoom();
+            }
+        });
+
+        document.getElementById('zoom-out').addEventListener('click', function() {
+            if (currentZoom > 1) {
+                currentZoom--;
+                updateZoom();
+            }
+        });
+
+        function updateZoom() {
+            // Remove all zoom classes
+            container.classList.remove('zoom-1', 'zoom-2', 'zoom-3', 'zoom-4', 'zoom-5');
+            // Add current zoom class
+            container.classList.add(`zoom-${currentZoom}`);
+            // Update zoom display
+            zoomDisplay.textContent = `Zoom: ${zoomLevels[currentZoom-1]}`;
+        }
+
+        // Initialize zoom
+        updateZoom();
+    </script>
+</body>
+</html>

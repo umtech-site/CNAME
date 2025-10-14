@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>X-Ray Study Portal - TheUmTech</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: all 0.5s ease; }
+body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e50; min-height:100vh; padding:20px; overflow-x: hidden; }
+.xray-container { max-width:1400px; margin:auto; background:#fff0f5; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.2); overflow:hidden; color:#2c3e50; animation: fadeIn 0.8s ease-out; }
+
+.xray-quran-verse { text-align:center; padding:15px; background:linear-gradient(to right,#f8a5c2,#f67280); color:white; font-size:1.2rem; border-radius:10px; margin-bottom:20px; animation: slideDown 0.7s ease-out; }
+
+.xray-header { background: linear-gradient(to right,#f8a5c2,#f67280); color:white; padding:30px; text-align:center; position: relative; overflow: hidden; }
+.xray-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: pulse 15s infinite linear;
+}
+.xray-logo { font-size:2.5rem; font-weight:bold; display:flex; justify-content:center; align-items:center; position: relative; z-index: 2; }
+.xray-logo-icon { margin-right:15px; font-size:2.8rem; animation: bounce 2s infinite; }
+.xray-tagline { font-style:italic; margin-top:10px; opacity:0.9; position: relative; z-index: 2; }
+
+.xray-main-content { display:flex; flex-wrap:wrap; padding:20px; }
+.xray-section { flex:1; min-width:300px; padding:20px; background:#fff0f5; border-radius:10px; margin-right:20px; animation: fadeInLeft 0.8s ease-out; }
+.xray-section h2 { color:#ff6b81; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid #f8a5c2; position: relative; }
+.xray-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: #ff6b81;
+  animation: expandLine 1.5s ease-out;
+}
+
+/* FIXED: 3 cards per row */
+.xray-cards-grid { 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+.xray-card { 
+  background:#ffe4f0; 
+  border-radius:8px; 
+  padding:15px; 
+  text-align:center; 
+  cursor:pointer; 
+  transition:all 0.3s; 
+  box-shadow:0 3px 6px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out;
+}
+.xray-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+.xray-card:hover::before {
+  left: 100%;
+}
+.xray-card:hover { 
+  transform:translateY(-5px) scale(1.03); 
+  box-shadow:0 10px 25px rgba(0,0,0,0.2); 
+  background:#f67280; 
+  color:white; 
+}
+.xray-card-icon { font-size:2rem; margin-bottom:10px; color:#ff6b81; transition: all 0.5s; }
+.xray-card:hover .xray-card-icon { 
+  color:white; 
+  transform: rotate(360deg) scale(1.2);
+}
+
+/* Enhanced Study Section */
+.xray-study-details { 
+  flex:2; 
+  min-width:300px; 
+  padding:20px; 
+  background: linear-gradient(135deg, #ffe4f0, #ffd6e6, #ffe4f0);
+  border-radius:10px; 
+  animation: fadeInRight 0.8s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+.xray-study-details::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+  background-size: 200% 200%;
+  animation: wave 15s infinite linear;
+  z-index: 1;
+}
+.xray-study-header { 
+  display:flex; 
+  align-items:center; 
+  margin-bottom:20px; 
+  position: relative;
+  z-index: 2;
+}
+.xray-study-icon { 
+  font-size:2.5rem; 
+  margin-right:15px; 
+  color:#ff6b81; 
+  transition: all 0.5s; 
+  animation: pulse 2s infinite;
+}
+.xray-study-content { 
+  background:rgba(255, 255, 255, 0.7); 
+  padding:20px; 
+  border-radius:10px; 
+  box-shadow:0 3px 10px rgba(0,0,0,0.1); 
+  min-height:300px; 
+  display:flex; 
+  flex-direction:column; 
+  justify-content:center; 
+  align-items:center; 
+  text-align:center;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(5px);
+}
+.xray-welcome-icon { 
+  font-size:5rem; 
+  color:#f67280; 
+  margin-bottom:20px; 
+  animation: pulse 2s infinite;
+  text-shadow: 0 0 10px rgba(255, 107, 129, 0.3);
+}
+.xray-welcome-text h2 { 
+  color:#ff6b81; 
+  margin-bottom:10px; 
+  cursor:pointer;
+  text-shadow: 0 0 5px rgba(255, 107, 129, 0.2);
+}
+
+.xray-features { display:flex; flex-wrap:wrap; justify-content:space-around; padding:30px; background:linear-gradient(to right,#f8a5c2,#f67280); color:white; position: relative; overflow: hidden; }
+.xray-features::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+  background-size: 100% 100%;
+  animation: wave 20s infinite linear;
+  z-index: 1;
+}
+.xray-feature { text-align:center; max-width:250px; margin:15px; position: relative; z-index: 2; transition: all 0.5s; }
+.xray-feature:hover {
+  transform: translateY(-10px);
+}
+.xray-feature-icon { font-size:2.5rem; margin-bottom:15px; transition: all 0.5s; }
+.xray-feature:hover .xray-feature-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.xray-footer { text-align:center; padding:20px; background:linear-gradient(to right,#f67280,#f8a5c2); color:white; position: relative; }
+
+@media(max-width:1200px){
+  .xray-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width:768px){
+  .xray-main-content{ flex-direction:column; } 
+  .xray-section{ margin-right:0; margin-bottom:20px; }
+  .xray-cards-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.xray-active-card { background:#f67280 !important; color:white !important; }
+.xray-active-card .xray-card-icon { color:white !important; }
+
+#xray-theme-switch, #xray-night-mode-switch { 
+  position: fixed; 
+  top:20px; 
+  width:50px; 
+  height:50px; 
+  border-radius:50%; 
+  display:flex; 
+  justify-content:center; 
+  align-items:center; 
+  cursor:pointer; 
+  box-shadow:0 5px 15px rgba(0,0,0,0.3); 
+  font-size:1.5rem; 
+  z-index:999; 
+  transition: all 0.5s; 
+  animation: bounceIn 1s ease-out;
+}
+#xray-theme-switch { right:80px; background:#ff6b81; color:white; }
+#xray-night-mode-switch { right:20px; background:#333; color:white; }
+#xray-theme-switch:hover { transform: scale(1.1) rotate(180deg); }
+#xray-night-mode-switch:hover { transform: scale(1.1) rotate(15deg); }
+
+body.xray-night-mode { background:#121212 !important; color:#e0e0e0 !important; }
+body.xray-night-mode .xray-container { background:#1e1e1e !important; color:#e0e0e0 !important; }
+body.xray-night-mode .xray-header, body.xray-night-mode .xray-features, body.xray-night-mode .xray-footer { background:#1a1a1a !important; color:#e0e0e0 !important; }
+body.xray-night-mode .xray-section, body.xray-night-mode .xray-study-details, body.xray-night-mode .xray-study-content { background:#252525 !important; color:#e0e0e0 !important; box-shadow:none !important; }
+body.xray-night-mode .xray-card { background:#2d2d2d !important; color:#e0e0e0 !important; box-shadow:none !important; }
+body.xray-night-mode .xray-card:hover { background:#3a3a3a !important; color:#e0e0e0 !important; }
+body.xray-night-mode .xray-card-icon, body.xray-night-mode .xray-study-icon, body.xray-night-mode .xray-welcome-icon, body.xray-night-mode .xray-feature-icon { color:#bb86fc !important; }
+body.xray-night-mode .xray-welcome-text h2 a { color:#bb86fc !important; }
+body.xray-night-mode .xray-section h2 { color:#bb86fc !important; border-bottom-color:#bb86fc !important; }
+body.xray-night-mode .xray-features { color:#e0e0e0 !important; }
+body.xray-night-mode .xray-footer { color:#e0e0e0 !important; }
+
+/* Zoom Buttons */
+#xray-zoom-out, #xray-zoom-in {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background: #ff6b81;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  font-size: 1.5rem;
+  z-index: 999;
+  right: 20px;
+  transition: all 0.3s;
+}
+
+#xray-zoom-out:hover, #xray-zoom-in:hover {
+  transform: scale(1.1);
+}
+
+#xray-zoom-out {
+  top: 90px;
+}
+
+#xray-zoom-in {
+  top: 150px;
+}
+
+/* Enhanced Button styles for study content */
+.xray-topic-button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px;
+  background: linear-gradient(135deg, #ff6b81, #f67280);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.xray-topic-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: 0.6s;
+}
+
+.xray-topic-button:hover::before {
+  left: 100%;
+}
+
+.xray-topic-button:hover {
+  background: linear-gradient(135deg, #f67280, #ff6b81);
+  transform: translateX(8px) translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.xray-topic-button i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+}
+
+.xray-topic-button:hover i {
+  transform: scale(1.2) rotate(10deg);
+}
+
+body.xray-night-mode .xray-topic-button {
+  background: linear-gradient(135deg, #3700b3, #6200ee);
+  color: white;
+}
+
+body.xray-night-mode .xray-topic-button:hover {
+  background: linear-gradient(135deg, #6200ee, #3700b3);
+}
+
+/* Study content animations */
+@keyframes contentSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.study-content-animate {
+  animation: contentSlideIn 0.6s ease-out;
+}
+
+/* Enhanced study section animations */
+@keyframes studyPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.xray-study-details:hover {
+  animation: studyPulse 2s infinite;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from { 
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from { 
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDown {
+  from { 
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 0.5; }
+}
+
+@keyframes wave {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes expandLine {
+  from { width: 0; }
+  to { width: 50px; }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Particle animation for headers */
+.xray-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: float 15s infinite linear;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px) translateX(100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Theme transition animation */
+.theme-transition {
+  animation: themeChange 1s ease-out;
+}
+
+@keyframes themeChange {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* Study section specific particles */
+.study-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.study-particle {
+  position: absolute;
+  background: rgba(255, 107, 129, 0.2);
+  border-radius: 50%;
+  animation: float 12s infinite linear;
+}
+</style>
+</head>
+<body>
+<div class="xray-container">
+
+  <div class="xray-quran-verse">
+    <strong>“Allah is the Light of the heavens and the earth…”</strong> - Surah An-Nur (24:35)
+  </div>
+
+  <header class="xray-header">
+    <div class="xray-particles" id="header-particles"></div>
+    <div class="xray-logo"><span class="xray-logo-icon"><i class="fas fa-x-ray"></i></span><span>X-Ray Study Portal</span></div>
+    <p class="xray-tagline">Comprehensive resource for X-ray technologists and students</p>
+  </header>
+
+  <div class="xray-main-content">
+    <div class="xray-section">
+      <h2>X-Ray Topics</h2>
+      <div class="xray-cards-grid">
+        <div class="xray-card" onclick="xrayShowPart('physics', this)"><div class="xray-card-icon"><i class="fas fa-atom"></i></div><p>Radiographic Physics & Equipment</p></div>
+        <div class="xray-card" onclick="xrayShowPart('protection', this)"><div class="xray-card-icon"><i class="fas fa-shield-alt"></i></div><p>Radiation Protection & Safety ALARA</p></div>
+        <div class="xray-card" onclick="xrayShowPart('anatomy', this)"><div class="xray-card-icon"><i class="fas fa-brain"></i></div><p>Radiographic Anatomy & Positioning</p></div>
+        <div class="xray-card" onclick="xrayShowPart('patient-care', this)"><div class="xray-card-icon"><i class="fas fa-user-nurse"></i></div><p>Patient Care & Ethics</p></div>
+        <div class="xray-card" onclick="xrayShowPart('image-evaluation', this)"><div class="xray-card-icon"><i class="fas fa-chart-line"></i></div><p>Image Evaluation / Quality Assurance</p></div>
+        <div class="xray-card" onclick="xrayShowPart('pathology', this)"><div class="xray-card-icon"><i class="fas fa-notes-medical"></i></div><p>Radiographic Pathology Recognition</p></div>
+      </div>
+    </div>
+
+    <div class="xray-study-details">
+      <div class="study-particles" id="study-particles"></div>
+      <div class="xray-study-header">
+        <div class="xray-study-icon"><i class="fas fa-x-ray"></i></div>
+        <div><h2>Welcome</h2><p>Select an X-Ray topic to begin study</p></div>
+      </div>
+      <div class="xray-study-content">
+        <div class="xray-welcome-icon"><i class="fas fa-hand-point-up"></i></div>
+        <div class="xray-welcome-text">
+          <h2><a href="#" style="text-decoration:none;color:#ff6b81;">Welcome to X-Ray Study Portal</a></h2>
+          <p>Select a card from X-Ray Topics to view detailed materials and protocols.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="xray-features">
+    <div class="xray-particles" id="features-particles"></div>
+    <div class="xray-feature"><div class="xray-feature-icon"><i class="fas fa-book-medical"></i></div><h3>Study Guides</h3><p>Comprehensive guides for X-ray topics</p></div>
+    <div class="xray-feature"><div class="xray-feature-icon"><i class="fas fa-vial"></i></div><h3>Practice Quizzes</h3><p>Test your X-ray knowledge with our question bank</p></div>
+    <div class="xray-feature"><div class="xray-feature-icon"><i class="fas fa-procedures"></i></div><h3>Positioning Tips</h3><p>Learn X-ray positioning and techniques</p></div>
+  </div>
+
+  <footer class="xray-footer">
+    <p>© 2025 TheUmTech X-Ray Study Portal. All rights reserved. Educational purposes only.</p>
+  </footer>
+</div>
+
+<div id="xray-theme-switch" title="Change Theme"><i class="fas fa-palette"></i></div>
+<div id="xray-night-mode-switch" title="Night Mode"><i class="fas fa-moon"></i></div>
+
+<script>
+// Enhanced themes with world-class color schemes
+const xrayThemes = [
+  // Pink Theme
+  {
+    name: "Pink Elegance",
+    body: 'linear-gradient(135deg, #f9d5e5, #fddde6, #fce4ec)', 
+    container: '#fff0f5', 
+    header: 'linear-gradient(to right, #f8a5c2, #f67280)', 
+    cards: '#ffe4f0', 
+    study: 'linear-gradient(135deg, #ffe4f0, #ffd6e6, #ffe4f0)', 
+    features: 'linear-gradient(to right, #f8a5c2, #f67280)', 
+    footer: 'linear-gradient(to right, #f67280, #f8a5c2)'
+  },
+  // Ocean Blue Theme
+  {
+    name: "Ocean Blue",
+    body: 'linear-gradient(135deg, #a1c4fd, #c2e9fb, #667eea)', 
+    container: '#e2f1fd', 
+    header: 'linear-gradient(to right, #667eea, #764ba2)', 
+    cards: '#d3e5ff', 
+    study: 'linear-gradient(135deg, #d3e5ff, #c2e9fb, #d3e5ff)', 
+    features: 'linear-gradient(to right, #667eea, #764ba2)', 
+    footer: 'linear-gradient(to right, #764ba2, #667eea)'
+  },
+  // Sunset Orange Theme
+  {
+    name: "Sunset Glow",
+    body: 'linear-gradient(135deg, #ffafbd, #ffc3a0, #ff7e5f)', 
+    container: '#ffefed', 
+    header: 'linear-gradient(to right, #ff7e5f, #feb47b)', 
+    cards: '#ffe4e1', 
+    study: 'linear-gradient(135deg, #ffe4e1, #ffc3a0, #ffe4e1)', 
+    features: 'linear-gradient(to right, #ff7e5f, #feb47b)', 
+    footer: 'linear-gradient(to right, #feb47b, #ff7e5f)'
+  },
+  // Mint Green Theme
+  {
+    name: "Mint Fresh",
+    body: 'linear-gradient(135deg, #00b894, #55efc4, #81ecec)', 
+    container: '#eafff7', 
+    header: 'linear-gradient(to right, #00b894, #55efc4)', 
+    cards: '#d1f7ec', 
+    study: 'linear-gradient(135deg, #d1f7ec, #55efc4, #d1f7ec)', 
+    features: 'linear-gradient(to right, #00b894, #55efc4)', 
+    footer: 'linear-gradient(to right, #55efc4, #00b894)'
+  },
+  // Royal Purple Theme
+  {
+    name: "Royal Purple",
+    body: 'linear-gradient(135deg, #6a11cb, #2575fc, #8e2de2)', 
+    container: '#f0e6ff', 
+    header: 'linear-gradient(to right, #8e2de2, #4a00e0)', 
+    cards: '#e6d9ff', 
+    study: 'linear-gradient(135deg, #e6d9ff, #8e2de2, #e6d9ff)', 
+    features: 'linear-gradient(to right, #8e2de2, #4a00e0)', 
+    footer: 'linear-gradient(to right, #4a00e0, #8e2de2)'
+  }
+];
+
+let xrayCurrentTheme = 0;
+let currentIconClass = 'fas fa-x-ray';
+
+// Create particles for headers and study section
+function createParticles() {
+  const headerParticles = document.getElementById('header-particles');
+  const featuresParticles = document.getElementById('features-particles');
+  const studyParticles = document.getElementById('study-particles');
+  
+  // Clear existing particles
+  headerParticles.innerHTML = '';
+  featuresParticles.innerHTML = '';
+  studyParticles.innerHTML = '';
+  
+  // Create particles for header
+  for (let i = 0; i < 20; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.width = `${Math.random() * 5 + 2}px`;
+    particle.style.height = particle.style.width;
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+    particle.style.animationDelay = `${Math.random() * 5}s`;
+    headerParticles.appendChild(particle);
+  }
+  
+  // Create particles for features
+  for (let i = 0; i < 15; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.width = `${Math.random() * 5 + 2}px`;
+    particle.style.height = particle.style.width;
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+    particle.style.animationDelay = `${Math.random() * 5}s`;
+    featuresParticles.appendChild(particle);
+  }
+  
+  // Create particles for study section
+  for (let i = 0; i < 12; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('study-particle');
+    particle.style.width = `${Math.random() * 4 + 2}px`;
+    particle.style.height = particle.style.width;
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.animationDuration = `${Math.random() * 8 + 8}s`;
+    particle.style.animationDelay = `${Math.random() * 3}s`;
+    studyParticles.appendChild(particle);
+  }
+}
+
+// Initialize particles
+createParticles();
+
+document.getElementById('xray-theme-switch').addEventListener('click', () => {
+  // Add transition effect
+  document.body.classList.add('theme-transition');
+  
+  xrayCurrentTheme = (xrayCurrentTheme + 1) % xrayThemes.length;
+  const theme = xrayThemes[xrayCurrentTheme];
+  
+  document.body.style.transition = 'background 1s ease';
+  document.querySelector('.xray-container').style.transition = 'background 1s ease';
+  document.querySelector('.xray-header').style.transition = 'background 1s ease';
+  document.querySelector('.xray-features').style.transition = 'background 1s ease';
+  document.querySelector('.xray-footer').style.transition = 'background 1s ease';
+  
+  document.body.style.background = theme.body;
+  document.querySelector('.xray-container').style.background = theme.container;
+  document.querySelector('.xray-header').style.background = theme.header;
+  document.querySelectorAll('.xray-card').forEach(c => c.style.background = theme.cards);
+  document.querySelector('.xray-study-details').style.background = theme.study;
+  document.querySelector('.xray-features').style.background = theme.features;
+  document.querySelector('.xray-footer').style.background = theme.footer;
+  
+  // Update study icon with current icon class
+  updateStudyIcon();
+  
+  // Remove transition class after animation completes
+  setTimeout(() => {
+    document.body.classList.remove('theme-transition');
+  }, 1000);
+  
+  // Show theme name notification
+  showNotification(`Theme: ${theme.name}`);
+});
+
+document.getElementById('xray-night-mode-switch').addEventListener('click', () => {
+  document.body.classList.toggle('xray-night-mode');
+  // Update study icon when toggling night mode
+  updateStudyIcon();
+  
+  // Show notification
+  if (document.body.classList.contains('xray-night-mode')) {
+    showNotification('Night Mode Enabled');
+  } else {
+    showNotification('Night Mode Disabled');
+  }
+});
+
+function showNotification(message) {
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.textContent = message;
+  notification.style.position = 'fixed';
+  notification.style.bottom = '20px';
+  notification.style.left = '50%';
+  notification.style.transform = 'translateX(-50%)';
+  notification.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+  notification.style.color = 'white';
+  notification.style.padding = '10px 20px';
+  notification.style.borderRadius = '5px';
+  notification.style.zIndex = '1000';
+  notification.style.opacity = '0';
+  notification.style.transition = 'opacity 0.5s';
+  
+  document.body.appendChild(notification);
+  
+  // Animate in
+  setTimeout(() => {
+    notification.style.opacity = '1';
+  }, 10);
+  
+  // Animate out and remove
+  setTimeout(() => {
+    notification.style.opacity = '0';
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 500);
+  }, 2000);
+}
+
+function updateStudyIcon() {
+  const studyIcon = document.querySelector('.xray-study-icon');
+  studyIcon.innerHTML = `<i class="${currentIconClass}"></i>`;
+}
+
+function xrayShowPart(part, element){
+  const cards = document.querySelectorAll('.xray-card');
+  cards.forEach(card => card.classList.remove('xray-active-card'));
+  element.classList.add('xray-active-card');
+
+  const studyIcon = document.querySelector('.xray-study-icon');
+  const welcomeText = document.querySelector('.xray-welcome-text');
+
+  let iconClass='', heading='', topics=[];
+
+  switch(part){
+    case 'physics':
+      iconClass='fas fa-atom';
+      heading='Radiographic Physics & Equipment';
+      topics=[
+        'X-ray tube construction',
+        'Image formation (Photoelectric, Compton effect)',
+        'mA, kVp, exposure time',
+        'Focal spot size, SID, OID',
+        'Filtration, collimation',
+        'Grids & beam restriction',
+        'Digital vs analog imaging',
+        'PACS, CR vs DR'
+      ];
+      break;
+    case 'protection':
+      iconClass='fas fa-shield-alt';
+      heading='Radiation Protection & Safety ALARA';
+      topics=[
+        'Inverse square law',
+        'Time, distance, shielding',
+        'Lead apron, gonadal shields',
+        'Radiation dose limits (occupational & public)',
+        'Pregnant patient protocols',
+        'Scatter radiation, control measures'
+      ];
+      break;
+    case 'anatomy':
+      iconClass='fas fa-brain';
+      heading='Radiographic Anatomy & Positioning';
+      topics=[
+        'Xray Skull',
+        'Chest positioning and anatomy',
+        'Abdomen positioning and anatomy',
+        'Spine positioning and anatomy',
+        'Upper extremities / Shoulder joint',
+        'Pelvis / Hip joint',
+        'Lower extremities positioning'
+      ];
+      break;
+    case 'patient-care':
+      iconClass='fas fa-user-nurse';
+      heading='Patient Care & Ethics';
+      topics=[
+        'Informed consent',
+        'Manual handling and patient transfer',
+        'Infection control',
+        'Vital signs',
+        'Emergency protocols (e.g. code blue)',
+        'Communication skills & empathy',
+        'Professional ethics and confidentiality HIPAA/GDPR equivalent'
+      ];
+      break;
+    case 'image-evaluation':
+      iconClass='fas fa-chart-line';
+      heading='Image Evaluation / Quality Assurance';
+      topics=[
+        'Density, contrast, resolution, distortion',
+        'Image artifacts',
+        'Repeat analysis',
+        'Daily QA checks',
+        'Reject analysis & audit logs'
+      ];
+      break;
+    case 'pathology':
+      iconClass='fas fa-notes-medical';
+      heading='Radiographic Pathology Recognition';
+      topics=[
+        'Fractures types, signs',
+        'Chest pathology pneumonia, pleural effusion, TB',
+        'Bone lesions osteomyelitis, metastases',
+        'Abdominal findings (obstruction, calcifications)',
+        'Joint conditions arthritis, dislocations'
+      ];
+      break;
+    default:
+      iconClass='fas fa-x-ray';
+      heading='Welcome';
+      topics=[];
+  }
+
+  // Store the current icon class and update the icon
+  currentIconClass = iconClass;
+  updateStudyIcon();
+
+  // Create vertical buttons with icons
+  if(topics.length > 0){
+    let html = `<h2 style="margin-bottom: 20px;">${heading}</h2>`;
+    topics.forEach(topic => {
+      const fileName = 'xray' + topic.replace(/\s+/g,'_').replace(/[,&]/g,'').replace(/\//g,'_') + '.html';
+      const icon = getIconForTopic(topic);
+      html += `<button class="xray-topic-button study-content-animate" onclick="window.location.href='${fileName}'"><i class="${icon}"></i>${topic}</button>`;
+    });
+    welcomeText.innerHTML = html;
+  } else {
+    welcomeText.innerHTML = '<h2>Select an X-Ray topic to begin study</h2>';
+  }
+}
+
+function getIconForTopic(topic) {
+  // Return appropriate icon based on topic
+  if (topic.includes('X-ray tube')) return 'fas fa-microscope';
+  if (topic.includes('Image formation')) return 'fas fa-image';
+  if (topic.includes('mA') || topic.includes('kVp')) return 'fas fa-sliders-h';
+  if (topic.includes('Focal spot')) return 'fas fa-bullseye';
+  if (topic.includes('Filtration')) return 'fas fa-filter';
+  if (topic.includes('Grids')) return 'fas fa-th';
+  if (topic.includes('Digital')) return 'fas fa-desktop';
+  if (topic.includes('PACS')) return 'fas fa-database';
+  if (topic.includes('Inverse square')) return 'fas fa-ruler-combined';
+  if (topic.includes('Time, distance')) return 'fas fa-clock';
+  if (topic.includes('Lead apron')) return 'fas fa-vest';
+  if (topic.includes('Radiation dose')) return 'fas fa-radiation';
+  if (topic.includes('Pregnant')) return 'fas fa-baby';
+  if (topic.includes('Scatter')) return 'fas fa-radiation-alt';
+  if (topic.includes('Head')) return 'fas fa-brain';
+  if (topic.includes('Chest')) return 'fas fa-lungs';
+  if (topic.includes('Abdomen')) return 'fas fa-stomach';
+  if (topic.includes('Spine')) return 'fas fa-bone';
+  if (topic.includes('Upper extremities')) return 'fas fa-hand-paper';
+  if (topic.includes('Pelvis')) return 'fas fa-bone';
+  if (topic.includes('Lower extremities')) return 'fas fa-running';
+  if (topic.includes('Informed consent')) return 'fas fa-file-signature';
+  if (topic.includes('Manual handling')) return 'fas fa-people-carry';
+  if (topic.includes('Infection control')) return 'fas fa-hand-sparkles';
+  if (topic.includes('Vital signs')) return 'fas fa-heartbeat';
+  if (topic.includes('Emergency')) return 'fas fa-ambulance';
+  if (topic.includes('Communication')) return 'fas fa-comments';
+  if (topic.includes('Professional ethics')) return 'fas fa-gavel';
+  if (topic.includes('Density')) return 'fas fa-weight';
+  if (topic.includes('Image artifacts')) return 'fas fa-exclamation-triangle';
+  if (topic.includes('Repeat analysis')) return 'fas fa-redo';
+  if (topic.includes('Daily QA')) return 'fas fa-calendar-day';
+  if (topic.includes('Reject analysis')) return 'fas fa-chart-bar';
+  if (topic.includes('Fractures')) return 'fas fa-bone';
+  if (topic.includes('Chest pathology')) return 'fas fa-lungs';
+  if (topic.includes('Bone lesions')) return 'fas fa-bone';
+  if (topic.includes('Abdominal findings')) return 'fas fa-stomach';
+  if (topic.includes('Joint conditions')) return 'fas fa-wheelchair';
+  
+  return 'fas fa-book';
+}
+</script>
+<!-- Zoom Buttons -->
+<div id="xray-zoom-out" title="Zoom Out">-</div>
+<div id="xray-zoom-in" title="Zoom In">+</div>
+
+<script>
+// Zoom functionality
+const container = document.querySelector('.xray-container');
+document.getElementById('xray-zoom-out').addEventListener('click', () => {
+  container.style.transform = 'scale(0.7)';
+  container.style.transformOrigin = 'top center';
+  showNotification('Zoomed Out');
+});
+
+document.getElementById('xray-zoom-in').addEventListener('click', () => {
+  container.style.transform = 'scale(1)';
+  container.style.transformOrigin = 'top center';
+  showNotification('Zoom Reset');
+});
+</script>
+
+</body>
+</html>
