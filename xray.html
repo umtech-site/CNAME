@@ -7,12 +7,43 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: all 0.5s ease; }
-body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e50; min-height:100vh; padding:20px; overflow-x: hidden; }
-.xray-container { max-width:1400px; margin:auto; background:#fff0f5; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.2); overflow:hidden; color:#2c3e50; animation: fadeIn 0.8s ease-out; }
+body { 
+  background: #121212 !important; 
+  color:#e0e0e0 !important; 
+  min-height:100vh; 
+  padding:20px; 
+  overflow-x: hidden; 
+}
+.xray-container { 
+  background:#1e1e1e !important; 
+  color:#e0e0e0 !important; 
+  max-width:1400px; 
+  margin:auto; 
+  border-radius:15px; 
+  box-shadow:0 10px 30px rgba(0,0,0,0.2); 
+  overflow:hidden; 
+  animation: fadeIn 0.8s ease-out; 
+}
 
-.xray-quran-verse { text-align:center; padding:15px; background:linear-gradient(to right,#f8a5c2,#f67280); color:white; font-size:1.2rem; border-radius:10px; margin-bottom:20px; animation: slideDown 0.7s ease-out; }
+.xray-quran-verse { 
+  text-align:center; 
+  padding:15px; 
+  background:linear-gradient(to right,#3700b3, #6200ee); 
+  color:white; 
+  font-size:1.2rem; 
+  border-radius:10px; 
+  margin-bottom:20px; 
+  animation: slideDown 0.7s ease-out; 
+}
 
-.xray-header { background: linear-gradient(to right,#f8a5c2,#f67280); color:white; padding:30px; text-align:center; position: relative; overflow: hidden; }
+.xray-header { 
+  background: #1a1a1a !important; 
+  color:#e0e0e0 !important; 
+  padding:30px; 
+  text-align:center; 
+  position: relative; 
+  overflow: hidden; 
+}
 .xray-header::before {
   content: '';
   position: absolute;
@@ -28,8 +59,23 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
 .xray-tagline { font-style:italic; margin-top:10px; opacity:0.9; position: relative; z-index: 2; }
 
 .xray-main-content { display:flex; flex-wrap:wrap; padding:20px; }
-.xray-section { flex:1; min-width:300px; padding:20px; background:#fff0f5; border-radius:10px; margin-right:20px; animation: fadeInLeft 0.8s ease-out; }
-.xray-section h2 { color:#ff6b81; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid #f8a5c2; position: relative; }
+.xray-section { 
+  flex:1; 
+  min-width:300px; 
+  padding:20px; 
+  background:#252525 !important; 
+  color:#e0e0e0 !important; 
+  border-radius:10px; 
+  margin-right:20px; 
+  animation: fadeInLeft 0.8s ease-out; 
+}
+.xray-section h2 { 
+  color:#bb86fc !important; 
+  margin-bottom:20px; 
+  padding-bottom:10px; 
+  border-bottom:2px solid #bb86fc !important; 
+  position: relative; 
+}
 .xray-section h2::after {
   content: '';
   position: absolute;
@@ -37,7 +83,7 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
   left: 0;
   width: 50px;
   height: 2px;
-  background: #ff6b81;
+  background: #bb86fc;
   animation: expandLine 1.5s ease-out;
 }
 
@@ -48,7 +94,8 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
   gap: 15px;
 }
 .xray-card { 
-  background:#ffe4f0; 
+  background:#2d2d2d !important; 
+  color:#e0e0e0 !important; 
   border-radius:8px; 
   padding:15px; 
   text-align:center; 
@@ -75,12 +122,17 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
 .xray-card:hover { 
   transform:translateY(-5px) scale(1.03); 
   box-shadow:0 10px 25px rgba(0,0,0,0.2); 
-  background:#f67280; 
-  color:white; 
+  background:#3a3a3a !important; 
+  color:white !important; 
 }
-.xray-card-icon { font-size:2rem; margin-bottom:10px; color:#ff6b81; transition: all 0.5s; }
+.xray-card-icon { 
+  font-size:2rem; 
+  margin-bottom:10px; 
+  color:#bb86fc !important; 
+  transition: all 0.5s; 
+}
 .xray-card:hover .xray-card-icon { 
-  color:white; 
+  color:white !important; 
   transform: rotate(360deg) scale(1.2);
 }
 
@@ -89,7 +141,8 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
   flex:2; 
   min-width:300px; 
   padding:20px; 
-  background: linear-gradient(135deg, #ffe4f0, #ffd6e6, #ffe4f0);
+  background: #252525 !important; 
+  color:#e0e0e0 !important; 
   border-radius:10px; 
   animation: fadeInRight 0.8s ease-out;
   position: relative;
@@ -117,12 +170,12 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
 .xray-study-icon { 
   font-size:2.5rem; 
   margin-right:15px; 
-  color:#ff6b81; 
+  color:#bb86fc !important; 
   transition: all 0.5s; 
   animation: pulse 2s infinite;
 }
 .xray-study-content { 
-  background:rgba(255, 255, 255, 0.7); 
+  background:rgba(50, 50, 50, 0.7) !important; 
   padding:20px; 
   border-radius:10px; 
   box-shadow:0 3px 10px rgba(0,0,0,0.1); 
@@ -138,19 +191,28 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
 }
 .xray-welcome-icon { 
   font-size:5rem; 
-  color:#f67280; 
+  color:#bb86fc !important; 
   margin-bottom:20px; 
   animation: pulse 2s infinite;
-  text-shadow: 0 0 10px rgba(255, 107, 129, 0.3);
+  text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
 }
 .xray-welcome-text h2 { 
-  color:#ff6b81; 
+  color:#bb86fc !important; 
   margin-bottom:10px; 
   cursor:pointer;
-  text-shadow: 0 0 5px rgba(255, 107, 129, 0.2);
+  text-shadow: 0 0 5px rgba(187, 134, 252, 0.2);
 }
 
-.xray-features { display:flex; flex-wrap:wrap; justify-content:space-around; padding:30px; background:linear-gradient(to right,#f8a5c2,#f67280); color:white; position: relative; overflow: hidden; }
+.xray-features { 
+  display:flex; 
+  flex-wrap:wrap; 
+  justify-content:space-around; 
+  padding:30px; 
+  background:#1a1a1a !important; 
+  color:#e0e0e0 !important; 
+  position: relative; 
+  overflow: hidden; 
+}
 .xray-features::after {
   content: '';
   position: absolute;
@@ -167,12 +229,23 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
 .xray-feature:hover {
   transform: translateY(-10px);
 }
-.xray-feature-icon { font-size:2.5rem; margin-bottom:15px; transition: all 0.5s; }
+.xray-feature-icon { 
+  font-size:2.5rem; 
+  margin-bottom:15px; 
+  color:#bb86fc !important; 
+  transition: all 0.5s; 
+}
 .xray-feature:hover .xray-feature-icon {
   transform: scale(1.2) rotate(10deg);
 }
 
-.xray-footer { text-align:center; padding:20px; background:linear-gradient(to right,#f67280,#f8a5c2); color:white; position: relative; }
+.xray-footer { 
+  text-align:center; 
+  padding:20px; 
+  background:#1a1a1a !important; 
+  color:#e0e0e0 !important; 
+  position: relative; 
+}
 
 @media(max-width:1200px){
   .xray-cards-grid {
@@ -187,7 +260,7 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
     grid-template-columns: repeat(1, 1fr);
   }
 }
-.xray-active-card { background:#f67280 !important; color:white !important; }
+.xray-active-card { background:#3a3a3a !important; color:white !important; }
 .xray-active-card .xray-card-icon { color:white !important; }
 
 #xray-theme-switch, #xray-night-mode-switch { 
@@ -206,29 +279,77 @@ body { background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec); color:#2c3e5
   transition: all 0.5s; 
   animation: bounceIn 1s ease-out;
 }
-#xray-theme-switch { right:80px; background:#ff6b81; color:white; }
-#xray-night-mode-switch { right:20px; background:#333; color:white; }
+#xray-theme-switch { right:80px; background:#bb86fc; color:white; }
+#xray-night-mode-switch { right:20px; background:#bb86fc; color:white; }
 #xray-theme-switch:hover { transform: scale(1.1) rotate(180deg); }
 #xray-night-mode-switch:hover { transform: scale(1.1) rotate(15deg); }
 
-body.xray-night-mode { background:#121212 !important; color:#e0e0e0 !important; }
-body.xray-night-mode .xray-container { background:#1e1e1e !important; color:#e0e0e0 !important; }
-body.xray-night-mode .xray-header, body.xray-night-mode .xray-features, body.xray-night-mode .xray-footer { background:#1a1a1a !important; color:#e0e0e0 !important; }
-body.xray-night-mode .xray-section, body.xray-night-mode .xray-study-details, body.xray-night-mode .xray-study-content { background:#252525 !important; color:#e0e0e0 !important; box-shadow:none !important; }
-body.xray-night-mode .xray-card { background:#2d2d2d !important; color:#e0e0e0 !important; box-shadow:none !important; }
-body.xray-night-mode .xray-card:hover { background:#3a3a3a !important; color:#e0e0e0 !important; }
-body.xray-night-mode .xray-card-icon, body.xray-night-mode .xray-study-icon, body.xray-night-mode .xray-welcome-icon, body.xray-night-mode .xray-feature-icon { color:#bb86fc !important; }
-body.xray-night-mode .xray-welcome-text h2 a { color:#bb86fc !important; }
-body.xray-night-mode .xray-section h2 { color:#bb86fc !important; border-bottom-color:#bb86fc !important; }
-body.xray-night-mode .xray-features { color:#e0e0e0 !important; }
-body.xray-night-mode .xray-footer { color:#e0e0e0 !important; }
+/* Day mode styles - applied when night mode is toggled off */
+body:not(.xray-night-mode) { 
+  background: linear-gradient(135deg,#f9d5e5,#fddde6,#fce4ec) !important; 
+  color:#2c3e50 !important; 
+}
+body:not(.xray-night-mode) .xray-container { 
+  background:#fff0f5 !important; 
+  color:#2c3e50 !important; 
+}
+body:not(.xray-night-mode) .xray-quran-verse { 
+  background:linear-gradient(to right,#f8a5c2,#f67280) !important; 
+}
+body:not(.xray-night-mode) .xray-header, 
+body:not(.xray-night-mode) .xray-features, 
+body:not(.xray-night-mode) .xray-footer { 
+  background:linear-gradient(to right,#f8a5c2,#f67280) !important; 
+  color:white !important; 
+}
+body:not(.xray-night-mode) .xray-section, 
+body:not(.xray-night-mode) .xray-study-details, 
+body:not(.xray-night-mode) .xray-study-content { 
+  background:#fff0f5 !important; 
+  color:#2c3e50 !important; 
+  box-shadow:0 3px 10px rgba(0,0,0,0.1) !important; 
+}
+body:not(.xray-night-mode) .xray-card { 
+  background:#ffe4f0 !important; 
+  color:#2c3e50 !important; 
+  box-shadow:0 3px 6px rgba(0,0,0,0.1) !important; 
+}
+body:not(.xray-night-mode) .xray-card:hover { 
+  background:#f67280 !important; 
+  color:white !important; 
+}
+body:not(.xray-night-mode) .xray-card-icon, 
+body:not(.xray-night-mode) .xray-study-icon, 
+body:not(.xray-night-mode) .xray-welcome-icon, 
+body:not(.xray-night-mode) .xray-feature-icon { 
+  color:#ff6b81 !important; 
+}
+body:not(.xray-night-mode) .xray-welcome-text h2 a { 
+  color:#ff6b81 !important; 
+}
+body:not(.xray-night-mode) .xray-section h2 { 
+  color:#ff6b81 !important; 
+  border-bottom-color:#f8a5c2 !important; 
+}
+body:not(.xray-night-mode) .xray-features { 
+  color:white !important; 
+}
+body:not(.xray-night-mode) .xray-footer { 
+  color:white !important; 
+}
+body:not(.xray-night-mode) #xray-theme-switch { 
+  background:#ff6b81 !important; 
+}
+body:not(.xray-night-mode) #xray-night-mode-switch { 
+  background:#333 !important; 
+}
 
 /* Zoom Buttons */
 #xray-zoom-out, #xray-zoom-in {
   position: fixed;
   width: 50px;
   height: 50px;
-  background: #ff6b81;
+  background: #bb86fc;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -254,13 +375,18 @@ body.xray-night-mode .xray-footer { color:#e0e0e0 !important; }
   top: 150px;
 }
 
+body:not(.xray-night-mode) #xray-zoom-out,
+body:not(.xray-night-mode) #xray-zoom-in {
+  background: #ff6b81;
+}
+
 /* Enhanced Button styles for study content */
 .xray-topic-button {
   display: block;
   width: 100%;
   margin: 10px 0;
   padding: 15px;
-  background: linear-gradient(135deg, #ff6b81, #f67280);
+  background: linear-gradient(135deg, #3700b3, #6200ee);
   color: white;
   border: none;
   border-radius: 10px;
@@ -290,7 +416,7 @@ body.xray-night-mode .xray-footer { color:#e0e0e0 !important; }
 }
 
 .xray-topic-button:hover {
-  background: linear-gradient(135deg, #f67280, #ff6b81);
+  background: linear-gradient(135deg, #6200ee, #3700b3);
   transform: translateX(8px) translateY(-3px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
@@ -305,13 +431,13 @@ body.xray-night-mode .xray-footer { color:#e0e0e0 !important; }
   transform: scale(1.2) rotate(10deg);
 }
 
-body.xray-night-mode .xray-topic-button {
-  background: linear-gradient(135deg, #3700b3, #6200ee);
+body:not(.xray-night-mode) .xray-topic-button {
+  background: linear-gradient(135deg, #ff6b81, #f67280);
   color: white;
 }
 
-body.xray-night-mode .xray-topic-button:hover {
-  background: linear-gradient(135deg, #6200ee, #3700b3);
+body:not(.xray-night-mode) .xray-topic-button:hover {
+  background: linear-gradient(135deg, #f67280, #ff6b81);
 }
 
 /* Study content animations */
@@ -471,13 +597,13 @@ body.xray-night-mode .xray-topic-button:hover {
 
 .study-particle {
   position: absolute;
-  background: rgba(255, 107, 129, 0.2);
+  background: rgba(187, 134, 252, 0.2);
   border-radius: 50%;
   animation: float 12s infinite linear;
 }
 </style>
 </head>
-<body>
+<body class="xray-night-mode">
 <div class="xray-container">
 
   <div class="xray-quran-verse">
@@ -512,7 +638,7 @@ body.xray-night-mode .xray-topic-button:hover {
       <div class="xray-study-content">
         <div class="xray-welcome-icon"><i class="fas fa-hand-point-up"></i></div>
         <div class="xray-welcome-text">
-          <h2><a href="#" style="text-decoration:none;color:#ff6b81;">Welcome to X-Ray Study Portal</a></h2>
+          <h2><a href="#" style="text-decoration:none;color:#bb86fc;">Welcome to X-Ray Study Portal</a></h2>
           <p>Select a card from X-Ray Topics to view detailed materials and protocols.</p>
         </div>
       </div>
@@ -664,13 +790,26 @@ document.getElementById('xray-theme-switch').addEventListener('click', () => {
   document.querySelector('.xray-features').style.transition = 'background 1s ease';
   document.querySelector('.xray-footer').style.transition = 'background 1s ease';
   
-  document.body.style.background = theme.body;
-  document.querySelector('.xray-container').style.background = theme.container;
-  document.querySelector('.xray-header').style.background = theme.header;
-  document.querySelectorAll('.xray-card').forEach(c => c.style.background = theme.cards);
-  document.querySelector('.xray-study-details').style.background = theme.study;
-  document.querySelector('.xray-features').style.background = theme.features;
-  document.querySelector('.xray-footer').style.background = theme.footer;
+  // Apply theme based on night mode status
+  if (document.body.classList.contains('xray-night-mode')) {
+    // Keep night mode colors for text and structure, but apply theme gradients
+    document.body.style.background = '#121212';
+    document.querySelector('.xray-container').style.background = '#1e1e1e';
+    document.querySelector('.xray-header').style.background = '#1a1a1a';
+    document.querySelectorAll('.xray-card').forEach(c => c.style.background = '#2d2d2d');
+    document.querySelector('.xray-study-details').style.background = '#252525';
+    document.querySelector('.xray-features').style.background = '#1a1a1a';
+    document.querySelector('.xray-footer').style.background = '#1a1a1a';
+  } else {
+    // Apply full theme for day mode
+    document.body.style.background = theme.body;
+    document.querySelector('.xray-container').style.background = theme.container;
+    document.querySelector('.xray-header').style.background = theme.header;
+    document.querySelectorAll('.xray-card').forEach(c => c.style.background = theme.cards);
+    document.querySelector('.xray-study-details').style.background = theme.study;
+    document.querySelector('.xray-features').style.background = theme.features;
+    document.querySelector('.xray-footer').style.background = theme.footer;
+  }
   
   // Update study icon with current icon class
   updateStudyIcon();
