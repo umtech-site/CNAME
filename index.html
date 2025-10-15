@@ -21,7 +21,7 @@
       --text-light: #4a5568;
       --brand-color: #6a1b9a;
       --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-2: linear-gradient(135deg, #ff6b6b 0%, #ff9a3d 100%);
+      --gradient-2: linear-gradient(135deg, #ff6b6b 0%, #d68130 100%);
       --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
       --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
@@ -51,6 +51,125 @@
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    /* Password Lock Overlay */
+    .password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: all 0.5s ease;
+    }
+
+    .password-container {
+      background: rgba(30, 30, 30, 0.9);
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      border: 2px solid var(--primary-color);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .lock-icon {
+      font-size: 4rem;
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      animation: pulse 2s infinite;
+    }
+
+    .password-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .password-subtitle {
+      color: #b0b0b0;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .password-input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: 2px solid var(--primary-color);
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .password-input:focus {
+      outline: none;
+      border-color: var(--secondary-color);
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(1.02);
+    }
+
+    .password-input::placeholder {
+      color: #888;
+    }
+
+    .submit-btn {
+      padding: 1rem 2rem;
+      background: var(--gradient-2);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+    }
+
+    .error-message {
+      color: var(--secondary-color);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .error-message.show {
+      opacity: 1;
+    }
+
+    .hint-text {
+      color: #888;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    .main-content {
+      display: none;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .main-content.unlocked {
+      display: block;
     }
 
     .container {
@@ -628,6 +747,19 @@
       .footer-links {
         flex-wrap: wrap;
       }
+
+      .password-container {
+        padding: 2rem;
+        margin: 1rem;
+      }
+
+      .lock-icon {
+        font-size: 3rem;
+      }
+
+      .password-title {
+        font-size: 1.5rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -650,100 +782,193 @@
       .subject-grid {
         grid-template-columns: 1fr;
       }
+
+      .password-container {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
 
 <body class="night">
-  <button class="toggle-mode" id="modeBtn"><i class="fa-solid fa-sun"></i></button>
-
-  <div class="container">
-    <section class="welcome-section">
-      <h1 class="welcome-heading">Welcome To The Umair Medics</h1>
-      <p class="welcome-subheading">Advancing medical technology education through innovation and excellence in diagnostic imaging</p>
-      <button class="welcome-button" onclick="document.getElementById('subjects').scrollIntoView({behavior:'smooth'});">
-        <i class="fas fa-book-open"></i> Explore Subjects
-      </button>
-    </section>
-
-    <div class="profile-container">
-      <div class="profile-image-container">
-        <img src="profile.jpg.png" alt="Dr. AL-Kashif Umair" class="profile-image"
-        onerror="this.src='https://via.placeholder.com/236x320/667eea/ffffff?text=Dr.+AL-Kashif+Umair';this.onerror=null;">
+  <!-- Password Lock Overlay -->
+  <div class="password-overlay" id="passwordOverlay">
+    <div class="password-container">
+      <div class="lock-icon">
+        <i class="fas fa-lock"></i>
       </div>
-
-      <div class="profile-content">
-        <a href="https://www.facebook.com/1MUmairUllah/" target="_blank" class="profile-name">Dr. AL-Kashif Umair</a>
-        <h2 class="profile-title">CEO & Lead Diagnostic Sonographer</h2>
-        <p class="profile-description">
-          With over 15 years of experience in diagnostic ultrasound and a passion for medical technology innovation, I'm dedicated to advancing radiology education through cutting-edge techniques and comprehensive training programs.
-        </p>
-
-        <div class="credentials">
-          <h3>Professional Credentials:</h3>
-          <ul class="credentials-list">
-            <li>Certified Diagnostic Sonographer (ARDMS)</li>
-            <li>Specialist in Abdominal and Vascular Sonography</li>
-            <li>MID, MS Diagnostic Ultrasound</li>
-            <li>Medical Imaging Researcher</li>
-            <li>Academic Lecturer and Trainer</li>
-          </ul>
-        </div>
-
-        <div class="contact-links">
-          <a href="mailto:hafizumairm01@gmail.com" class="contact-link email-link">
-            <i class="fas fa-envelope"></i> Email
-          </a>
-          <a href="https://wa.me/923072441718" class="contact-link whatsapp-link">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-          </a>
-          <a href="student-form.html" target="_blank" class="contact-link form-link">
-            <i class="fas fa-user-graduate"></i> Enroll
-          </a>
-        </div>
+      <h2 class="password-title">Secure Access Required</h2>
+      <p class="password-subtitle">Enter the password to access The Umair Medics</p>
+      <input type="password" class="password-input" id="passwordInput" placeholder="Enter password..." autocomplete="off">
+      <button class="submit-btn" id="submitPassword">
+        <i class="fas fa-key"></i> Unlock Access
+      </button>
+      <div class="error-message" id="errorMessage">
+        Incorrect password. Please try again.
+      </div>
+      <div class="hint-text">
+        Hint: Think of a special number...
       </div>
     </div>
-
-    <section class="subject-section" id="subjects">
-      <h2 class="section-heading">Explore Diagnostic Imaging Modalities</h2>
-      <div class="subject-grid">
-        <a href="Ultrasound.html" class="subject-card" style="background: var(--gradient-3);">
-          <i class="fas fa-procedures"></i> Ultrasound Imaging
-        </a>
-        <a href="xray.html" class="subject-card" style="background: var(--gradient-2);">
-          <i class="fas fa-x-ray"></i> Radiography (X-ray)
-        </a>
-        <a href="MRI.html" class="subject-card" style="background: var(--gradient-7);">
-          <i class="fas fa-magnet"></i> Magnetic Resonance
-        </a>
-        <a href="CT Scan.html" class="subject-card" style="background: var(--gradient-4);">
-          <i class="fas fa-brain"></i> Computed Tomography
-        </a>
-        <a href="NM.html" class="subject-card" style="background: var(--gradient-5);">
-          <i class="fas fa-atom"></i> Nuclear Medicine
-        </a>
-        <a href="fluoroscopy.html" class="subject-card" style="background: var(--gradient-6);">
-          <i class="fas fa-video"></i> Fluoroscopy
-        </a>
-        <a href="Subjects/dexa.html" class="subject-card" style="background: var(--gradient-8);">
-          <i class="fas fa-bone"></i> Bone Densitometry
-        </a>
-      </div>
-    </section>
   </div>
 
-  <footer>
-    <div class="footer-links">
-      <a href="#profile" class="footer-link">About</a>
-      <a href="#subjects" class="footer-link">Programs</a>
-      <a href="student-form.html" class="footer-link">Admissions</a>
-      <a href="mailto:hafizumairm01@gmail.com" class="footer-link">Contact</a>
+  <!-- Main Content (Hidden until unlocked) -->
+  <div class="main-content" id="mainContent">
+    <button class="toggle-mode" id="modeBtn"><i class="fa-solid fa-sun"></i></button>
+
+    <div class="container">
+      <section class="welcome-section">
+        <h1 class="welcome-heading">Welcome To The Umair Medics</h1>
+        <p class="welcome-subheading">Advancing medical technology education through innovation and excellence in diagnostic imaging</p>
+        <button class="welcome-button" onclick="document.getElementById('subjects').scrollIntoView({behavior:'smooth'});">
+          <i class="fas fa-book-open"></i> Explore Subjects
+        </button>
+      </section>
+
+      <div class="profile-container">
+        <div class="profile-image-container">
+          <img src="profile.jpg.png" alt="Dr. AL-Kashif Umair" class="profile-image"
+          onerror="this.src='https://via.placeholder.com/236x320/667eea/ffffff?text=Dr.+AL-Kashif+Umair';this.onerror=null;">
+        </div>
+
+        <div class="profile-content">
+          <a href="https://www.facebook.com/1MUmairUllah/" target="_blank" class="profile-name">Dr. AL-Kashif Umair</a>
+          <h2 class="profile-title">CEO & Lead Diagnostic Sonographer</h2>
+          <p class="profile-description">
+            With over 15 years of experience in diagnostic ultrasound and a passion for medical technology innovation, I'm dedicated to advancing radiology education through cutting-edge techniques and comprehensive training programs.
+          </p>
+
+          <div class="credentials">
+            <h3>Professional Credentials:</h3>
+            <ul class="credentials-list">
+              <li>Certified Diagnostic Sonographer (ARDMS)</li>
+              <li>Specialist in Abdominal and Vascular Sonography</li>
+              <li>MID, MS Diagnostic Ultrasound</li>
+              <li>Medical Imaging Researcher</li>
+              <li>Academic Lecturer and Trainer</li>
+            </ul>
+          </div>
+
+          <div class="contact-links">
+            <a href="mailto:hafizumairm01@gmail.com" class="contact-link email-link">
+              <i class="fas fa-envelope"></i> Email
+            </a>
+            <a href="https://wa.me/923072441718" class="contact-link whatsapp-link">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            <a href="student-form.html" target="_blank" class="contact-link form-link">
+              <i class="fas fa-user-graduate"></i> Enroll
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <section class="subject-section" id="subjects">
+        <h2 class="section-heading">Explore Diagnostic Imaging Modalities</h2>
+        <div class="subject-grid">
+          <a href="Ultrasound.html" class="subject-card" style="background: var(--gradient-3);">
+            <i class="fas fa-procedures"></i> Ultrasound Imaging
+          </a>
+          <a href="xray.html" class="subject-card" style="background: var(--gradient-2);">
+            <i class="fas fa-x-ray"></i> Radiography (X-ray)
+          </a>
+          <a href="MRI.html" class="subject-card" style="background: var(--gradient-7);">
+            <i class="fas fa-magnet"></i> Magnetic Resonance
+          </a>
+          <a href="CT Scan.html" class="subject-card" style="background: var(--gradient-4);">
+            <i class="fas fa-brain"></i> Computed Tomography
+          </a>
+          <a href="NM.html" class="subject-card" style="background: var(--gradient-5);">
+            <i class="fas fa-atom"></i> Nuclear Medicine
+          </a>
+          <a href="fluoroscopy.html" class="subject-card" style="background: var(--gradient-6);">
+            <i class="fas fa-video"></i> Fluoroscopy
+          </a>
+          <a href="Subjects/dexa.html" class="subject-card" style="background: var(--gradient-8);">
+            <i class="fas fa-bone"></i> Bone Densitometry
+          </a>
+        </div>
+      </section>
     </div>
-    <p>&copy; 2025 The UmTech Institute. Designed by Dr. AL-Kashif Umair</p>
-  </footer>
+
+    <footer>
+      <div class="footer-links">
+        <a href="#profile" class="footer-link">About</a>
+        <a href="#subjects" class="footer-link">Programs</a>
+        <a href="student-form.html" class="footer-link">Admissions</a>
+        <a href="mailto:hafizumairm01@gmail.com" class="footer-link">Contact</a>
+      </div>
+      <p>&copy; 2025 The UmTech Institute. Designed by Dr. AL-Kashif Umair</p>
+    </footer>
+  </div>
 
   <script>
-    // Night mode toggle
+    // Password Lock System
+    const passwordOverlay = document.getElementById('passwordOverlay');
+    const mainContent = document.getElementById('mainContent');
+    const passwordInput = document.getElementById('passwordInput');
+    const submitBtn = document.getElementById('submitPassword');
+    const errorMessage = document.getElementById('errorMessage');
+    const correctPassword = '3.33';
+
+    // Check if already unlocked
+    if (localStorage.getItem('unlocked') === 'true') {
+      unlockWebsite();
+    }
+
+    function unlockWebsite() {
+      passwordOverlay.style.opacity = '0';
+      setTimeout(() => {
+        passwordOverlay.style.display = 'none';
+        mainContent.classList.add('unlocked');
+      }, 500);
+    }
+
+    function checkPassword() {
+      const enteredPassword = passwordInput.value.trim();
+      
+      if (enteredPassword === correctPassword) {
+        localStorage.setItem('unlocked', 'true');
+        unlockWebsite();
+      } else {
+        errorMessage.classList.add('show');
+        passwordInput.value = '';
+        passwordInput.focus();
+        
+        // Shake animation for wrong password
+        passwordInput.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+          passwordInput.style.animation = '';
+        }, 500);
+      }
+    }
+
+    // Add shake animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Event listeners
+    submitBtn.addEventListener('click', checkPassword);
+    
+    passwordInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        checkPassword();
+      }
+    });
+
+    // Clear error message when user starts typing
+    passwordInput.addEventListener('input', () => {
+      errorMessage.classList.remove('show');
+    });
+
+    // Night mode toggle (existing functionality)
     const modeBtn = document.getElementById("modeBtn");
     const icon = modeBtn.querySelector("i");
 
