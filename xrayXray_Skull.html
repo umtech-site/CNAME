@@ -6,13 +6,13 @@
     <title>Skull Anatomy Study Cards</title>
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #1abc9c;
-            --text-color: #333;
-            --bg-color: #f9f9f9;
-            --card-bg: #ffffff;
-            --header-bg: linear-gradient(135deg, #3498db, #2c3e50);
+            --primary-color: #9b59b6;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --text-color: #ecf0f1;
+            --bg-color: #2c3e50;
+            --card-bg: #34495e;
+            --header-bg: linear-gradient(135deg, #9b59b6, #34495e);
             --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             --card-height: 180px;
         }
@@ -21,6 +21,9 @@
             --primary-color: #3498db;
             --secondary-color: #2c3e50;
             --accent-color: #1abc9c;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
             --header-bg: linear-gradient(135deg, #3498db, #2c3e50);
         }
 
@@ -28,6 +31,9 @@
             --primary-color: #27ae60;
             --secondary-color: #2ecc71;
             --accent-color: #16a085;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
             --header-bg: linear-gradient(135deg, #27ae60, #2ecc71);
         }
 
@@ -35,6 +41,9 @@
             --primary-color: #9b59b6;
             --secondary-color: #8e44ad;
             --accent-color: #e74c3c;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
             --header-bg: linear-gradient(135deg, #9b59b6, #8e44ad);
         }
 
@@ -42,6 +51,9 @@
             --primary-color: #e67e22;
             --secondary-color: #d35400;
             --accent-color: #f39c12;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
             --header-bg: linear-gradient(135deg, #e67e22, #d35400);
         }
 
@@ -61,11 +73,96 @@
             color: var(--text-color);
             margin: 0;
             padding: 10px;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             height: 100vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            position: relative;
+        }
+
+        /* X-ray Background Animation */
+        .xray-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            overflow: hidden;
+        }
+
+        .xray-triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            opacity: 0.1;
+            animation: floatTriangle 15s infinite linear;
+        }
+
+        .triangle-1 {
+            border-width: 0 50px 100px 50px;
+            border-color: transparent transparent #9b59b6 transparent;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .triangle-2 {
+            border-width: 100px 50px 0 50px;
+            border-color: #3498db transparent transparent transparent;
+            top: 60%;
+            left: 80%;
+            animation-delay: 3s;
+        }
+
+        .triangle-3 {
+            border-width: 50px 0 50px 100px;
+            border-color: transparent transparent transparent #e74c3c;
+            top: 30%;
+            left: 70%;
+            animation-delay: 6s;
+        }
+
+        .triangle-4 {
+            border-width: 50px 100px 50px 0;
+            border-color: transparent #1abc9c transparent transparent;
+            top: 70%;
+            left: 20%;
+            animation-delay: 9s;
+        }
+
+        .triangle-5 {
+            border-width: 100px 50px 0 50px;
+            border-color: #f39c12 transparent transparent transparent;
+            top: 40%;
+            left: 40%;
+            animation-delay: 12s;
+        }
+
+        @keyframes floatTriangle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg);
+                opacity: 0.2;
+            }
+            50% {
+                transform: translateY(0) rotate(180deg);
+                opacity: 0.1;
+            }
+            75% {
+                transform: translateY(20px) rotate(270deg);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+                opacity: 0.1;
+            }
         }
 
         .header {
@@ -75,8 +172,15 @@
             background: var(--header-bg);
             color: white;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             flex-shrink: 0;
+            animation: fadeInDown 0.8s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            z-index: 1;
         }
 
         .header h1 {
@@ -90,6 +194,22 @@
             font-style: italic;
         }
 
+        .skull-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .skull-icon svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
         .controls {
             display: flex;
             justify-content: space-between;
@@ -98,6 +218,9 @@
             flex-wrap: wrap;
             gap: 8px;
             flex-shrink: 0;
+            animation: fadeIn 1s ease-out 0.3s both;
+            position: relative;
+            z-index: 1;
         }
 
         .theme-selector, .zoom-controls {
@@ -112,16 +235,19 @@
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid transparent;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .theme-icon:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .theme-icon.active {
             border-color: white;
-            box-shadow: 0 0 0 2px var(--accent-color);
+            box-shadow: 0 0 0 2px var(--accent-color), 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: scale(1.1);
         }
 
         .theme-blue-icon {
@@ -157,14 +283,15 @@
             padding: 6px 12px;
             border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-weight: bold;
             font-size: 0.8rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .zoom-level {
@@ -172,20 +299,23 @@
             padding: 6px 12px;
             border-radius: 4px;
             font-weight: bold;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             font-size: 0.8rem;
             min-width: 80px;
             text-align: center;
+            transition: all 0.3s ease;
         }
 
         .container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 12px;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             overflow-y: auto;
             padding: 5px;
             flex-grow: 1;
+            position: relative;
+            z-index: 1;
         }
 
         .section {
@@ -201,23 +331,52 @@
             font-size: 1rem;
             text-align: center;
             grid-column: 1 / -1;
+            animation: slideInLeft 0.6s ease-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .card {
             background: var(--card-bg);
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             cursor: pointer;
             height: var(--card-height);
             display: flex;
             flex-direction: column;
+            animation: fadeInUp 0.6s ease-out;
+            position: relative;
+            transform-style: preserve-3d;
         }
 
         .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .card:active {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card.clickable::after {
+            content: "Click for Details";
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: var(--accent-color);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.6rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover.clickable::after {
+            opacity: 1;
         }
 
         .card-header {
@@ -228,6 +387,7 @@
             text-align: center;
             font-size: 0.9rem;
             flex-shrink: 0;
+            transition: all 0.3s ease;
         }
 
         .card-content {
@@ -241,21 +401,42 @@
         .card-image {
             width: 100%;
             height: 70px;
-            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+            background: linear-gradient(135deg, #4a5f7a, #3a4a5f);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #777;
+            color: #bdc3c7;
             font-style: italic;
             font-size: 0.7rem;
             border-radius: 4px;
             margin-bottom: 6px;
             flex-shrink: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .night-mode .card-image {
-            background: linear-gradient(135deg, #4a5f7a, #3a4a5f);
-            color: #bdc3c7;
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover .card-image::before {
+            left: 100%;
+        }
+
+        .theme-blue .card-image,
+        .theme-green .card-image,
+        .theme-purple .card-image,
+        .theme-orange .card-image {
+            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+            color: #777;
         }
 
         .card-details {
@@ -263,6 +444,7 @@
             line-height: 1.3;
             overflow-y: auto;
             flex-grow: 1;
+            transition: all 0.3s ease;
         }
 
         .card-details p {
@@ -274,6 +456,51 @@
         .zoom-3 { transform: scale(1); }
         .zoom-4 { transform: scale(1.15); }
         .zoom-5 { transform: scale(1.3); }
+
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from { 
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
 
         /* Custom scrollbar for webkit browsers */
         .container::-webkit-scrollbar {
@@ -288,6 +515,11 @@
         .container::-webkit-scrollbar-thumb {
             background: var(--primary-color);
             border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .container::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
         }
 
         .card-details::-webkit-scrollbar {
@@ -321,6 +553,21 @@
             :root {
                 --card-height: 160px;
             }
+            
+            .header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .skull-icon {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .card.clickable::after {
+                font-size: 0.5rem;
+                padding: 1px 4px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -334,19 +581,55 @@
         }
     </style>
 </head>
-<body class="theme-blue">
+<body class="night-mode">
+    <!-- X-ray Background Animation -->
+    <div class="xray-background">
+        <div class="xray-triangle triangle-1"></div>
+        <div class="xray-triangle triangle-2"></div>
+        <div class="xray-triangle triangle-3"></div>
+        <div class="xray-triangle triangle-4"></div>
+        <div class="xray-triangle triangle-5"></div>
+    </div>
+
     <div class="header">
-        <h1>Skull Anatomy Study Cards</h1>
-        <p>"Allah is the Light of the heavens and the earth..." - Surah An-Nur 24:35</p>
+        <div class="skull-icon">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Skull shape -->
+                <ellipse cx="50" cy="50" rx="40" ry="45" fill="#f5f5f5" stroke="#333" stroke-width="2"/>
+                
+                <!-- Eye sockets -->
+                <ellipse cx="35" cy="40" rx="8" ry="10" fill="#333"/>
+                <ellipse cx="65" cy="40" rx="8" ry="10" fill="#333"/>
+                
+                <!-- Nasal cavity -->
+                <ellipse cx="50" cy="55" rx="5" ry="8" fill="#333"/>
+                
+                <!-- Teeth -->
+                <rect x="30" y="70" width="40" height="8" fill="#333"/>
+                <rect x="30" y="70" width="8" height="5" fill="#f5f5f5"/>
+                <rect x="38" y="70" width="8" height="5" fill="#f5f5f5"/>
+                <rect x="46" y="70" width="8" height="5" fill="#f5f5f5"/>
+                <rect x="54" y="70" width="8" height="5" fill="#f5f5f5"/>
+                <rect x="62" y="70" width="8" height="5" fill="#f5f5f5"/>
+                
+                <!-- Cracks/details -->
+                <path d="M 20 30 Q 30 25 40 30" stroke="#333" stroke-width="1" fill="none"/>
+                <path d="M 60 30 Q 70 25 80 30" stroke="#333" stroke-width="1" fill="none"/>
+            </svg>
+        </div>
+        <div>
+            <h1>Skull Anatomy Study Cards</h1>
+            <p>"Allah is the Light of the heavens and the earth..." - Surah An-Nur 24:35</p>
+        </div>
     </div>
 
     <div class="controls">
         <div class="theme-selector">
-            <div class="theme-icon theme-blue-icon active" data-theme="theme-blue"></div>
+            <div class="theme-icon theme-blue-icon" data-theme="theme-blue"></div>
             <div class="theme-icon theme-green-icon" data-theme="theme-green"></div>
             <div class="theme-icon theme-purple-icon" data-theme="theme-purple"></div>
             <div class="theme-icon theme-orange-icon" data-theme="theme-orange"></div>
-            <div class="theme-icon night-mode-icon" data-theme="night-mode">NM</div>
+            <div class="theme-icon night-mode-icon active" data-theme="night-mode">NM</div>
         </div>
         <div class="zoom-controls">
             <button id="zoom-out">Zoom Out</button>
@@ -359,7 +642,7 @@
         <!-- Cranial Bones Section -->
         <h2 class="section-title">Cranial Region (8 bones)</h2>
         
-        <div class="card">
+        <div class="card clickable" data-bone="frontal">
             <div class="card-header">Frontal Bone</div>
             <div class="card-content">
                 <div class="card-image">Frontal Diagram</div>
@@ -370,7 +653,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="parietal">
             <div class="card-header">Parietal Bones (2)</div>
             <div class="card-content">
                 <div class="card-image">Parietal Diagram</div>
@@ -381,7 +664,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="temporal">
             <div class="card-header">Temporal Bones (2)</div>
             <div class="card-content">
                 <div class="card-image">Temporal Diagram</div>
@@ -392,7 +675,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="occipital">
             <div class="card-header">Occipital Bone</div>
             <div class="card-content">
                 <div class="card-image">Occipital Diagram</div>
@@ -403,7 +686,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="sphenoid">
             <div class="card-header">Sphenoid Bone</div>
             <div class="card-content">
                 <div class="card-image">Sphenoid Diagram</div>
@@ -414,7 +697,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="ethmoid">
             <div class="card-header">Ethmoid Bone</div>
             <div class="card-content">
                 <div class="card-image">Ethmoid Diagram</div>
@@ -428,7 +711,7 @@
         <!-- Facial Bones Section -->
         <h2 class="section-title">Facial Region (14 bones)</h2>
         
-        <div class="card">
+        <div class="card clickable" data-bone="maxilla">
             <div class="card-header">Maxilla Bones (2)</div>
             <div class="card-content">
                 <div class="card-image">Maxilla Diagram</div>
@@ -439,7 +722,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="zygomatic">
             <div class="card-header">Zygomatic Bones (2)</div>
             <div class="card-content">
                 <div class="card-image">Zygomatic Diagram</div>
@@ -450,7 +733,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="nasal">
             <div class="card-header">Nasal Bones (2)</div>
             <div class="card-content">
                 <div class="card-image">Nasal Diagram</div>
@@ -461,7 +744,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="lacrimal">
             <div class="card-header">Lacrimal Bones (2)</div>
             <div class="card-content">
                 <div class="card-image">Lacrimal Diagram</div>
@@ -472,7 +755,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="palatine">
             <div class="card-header">Palatine Bones (2)</div>
             <div class="card-content">
                 <div class="card-image">Palatine Diagram</div>
@@ -483,7 +766,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="conchae">
             <div class="card-header">Inferior Nasal Conchae (2)</div>
             <div class="card-content">
                 <div class="card-image">Conchae Diagram</div>
@@ -494,7 +777,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="vomer">
             <div class="card-header">Vomer Bone</div>
             <div class="card-content">
                 <div class="card-image">Vomer Diagram</div>
@@ -505,7 +788,7 @@
             </div>
         </div>
         
-        <div class="card">
+        <div class="card clickable" data-bone="mandible">
             <div class="card-header">Mandible Bone</div>
             <div class="card-content">
                 <div class="card-image">Mandible Diagram</div>
@@ -520,6 +803,9 @@
     <script>
         // Theme switching functionality
         const themeIcons = document.querySelectorAll('.theme-icon');
+        
+        // Set night mode as default
+        document.body.classList.add('night-mode');
         
         themeIcons.forEach(icon => {
             icon.addEventListener('click', function() {
@@ -571,6 +857,152 @@
 
         // Initialize zoom
         updateZoom();
+        
+        // Add staggered animation to cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.05}s`;
+            });
+        });
+
+        // Function to get current theme colors
+        function getCurrentThemeColors() {
+            const computedStyle = getComputedStyle(document.body);
+            return {
+                primary: computedStyle.getPropertyValue('--primary-color').trim(),
+                secondary: computedStyle.getPropertyValue('--secondary-color').trim(),
+                accent: computedStyle.getPropertyValue('--accent-color').trim(),
+                text: computedStyle.getPropertyValue('--text-color').trim(),
+                bg: computedStyle.getPropertyValue('--bg-color').trim(),
+                cardBg: computedStyle.getPropertyStyle('--card-bg').trim()
+            };
+        }
+
+        // Make cards clickable to open new HTML pages
+        document.querySelectorAll('.card.clickable').forEach(card => {
+            card.addEventListener('click', function() {
+                const boneName = this.getAttribute('data-bone');
+                const cardTitle = this.querySelector('.card-header').textContent;
+                const colors = getCurrentThemeColors();
+                
+                // Create a new HTML page for the bone with current theme colors
+                const newPage = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${cardTitle} - Detailed View</title>
+    <style>
+        :root {
+            --primary-color: ${colors.primary};
+            --secondary-color: ${colors.secondary};
+            --accent-color: ${colors.accent};
+            --text-color: ${colors.text};
+            --bg-color: ${colors.bg};
+            --card-bg: ${colors.cardBg};
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            transition: all 0.5s ease;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        .bone-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            font-style: italic;
+            opacity: 0.8;
+        }
+        .details {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .details h2 {
+            color: var(--accent-color);
+            margin-top: 0;
+        }
+        .back-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>${cardTitle}</h1>
+        <div class="bone-image">Detailed ${cardTitle} Diagram</div>
+        <div class="details">
+            <h2>Anatomical Details</h2>
+            <p>This is a detailed view of the ${cardTitle}. Here you would find comprehensive information about its structure, function, and clinical significance.</p>
+            <p>The ${cardTitle} plays a crucial role in the overall anatomy of the skull, contributing to both structural integrity and functional capabilities.</p>
+            <p>Additional details about landmarks, articulations, and developmental aspects would be included in a complete educational resource.</p>
+        </div>
+        <button class="back-btn" onclick="window.close()">Close This Window</button>
+    </div>
+</body>
+</html>`;
+                
+                // Open the new page in a new window
+                const newWindow = window.open('', '_blank');
+                newWindow.document.write(newPage);
+                newWindow.document.close();
+            });
+        });
     </script>
+
+    <script>
+document.querySelectorAll('.card.clickable').forEach(card => {
+    card.addEventListener('click', () => {
+        const boneName = card.getAttribute('data-bone');
+        // Open corresponding HTML file in a new tab
+        window.open(`${boneName}.html`, '_blank');
+    });
+});
+</script>
+
 </body>
 </html>
