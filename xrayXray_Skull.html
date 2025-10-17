@@ -866,143 +866,14 @@
             });
         });
 
-        // Function to get current theme colors
-        function getCurrentThemeColors() {
-            const computedStyle = getComputedStyle(document.body);
-            return {
-                primary: computedStyle.getPropertyValue('--primary-color').trim(),
-                secondary: computedStyle.getPropertyValue('--secondary-color').trim(),
-                accent: computedStyle.getPropertyValue('--accent-color').trim(),
-                text: computedStyle.getPropertyValue('--text-color').trim(),
-                bg: computedStyle.getPropertyValue('--bg-color').trim(),
-                cardBg: computedStyle.getPropertyStyle('--card-bg').trim()
-            };
-        }
-
         // Make cards clickable to open new HTML pages
         document.querySelectorAll('.card.clickable').forEach(card => {
             card.addEventListener('click', function() {
                 const boneName = this.getAttribute('data-bone');
-                const cardTitle = this.querySelector('.card-header').textContent;
-                const colors = getCurrentThemeColors();
-                
-                // Create a new HTML page for the bone with current theme colors
-                const newPage = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${cardTitle} - Detailed View</title>
-    <style>
-        :root {
-            --primary-color: ${colors.primary};
-            --secondary-color: ${colors.secondary};
-            --accent-color: ${colors.accent};
-            --text-color: ${colors.text};
-            --bg-color: ${colors.bg};
-            --card-bg: ${colors.cardBg};
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: var(--bg-color);
-            color: var(--text-color);
-            min-height: 100vh;
-            transition: all 0.5s ease;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-        }
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 10px;
-        }
-        .bone-image {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: var(--text-color);
-            font-style: italic;
-            opacity: 0.8;
-        }
-        .details {
-            background: rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .details h2 {
-            color: var(--accent-color);
-            margin-top: 0;
-        }
-        .back-btn {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
-            padding: 10px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        .back-btn:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>${cardTitle}</h1>
-        <div class="bone-image">Detailed ${cardTitle} Diagram</div>
-        <div class="details">
-            <h2>Anatomical Details</h2>
-            <p>This is a detailed view of the ${cardTitle}. Here you would find comprehensive information about its structure, function, and clinical significance.</p>
-            <p>The ${cardTitle} plays a crucial role in the overall anatomy of the skull, contributing to both structural integrity and functional capabilities.</p>
-            <p>Additional details about landmarks, articulations, and developmental aspects would be included in a complete educational resource.</p>
-        </div>
-        <button class="back-btn" onclick="window.close()">Close This Window</button>
-    </div>
-</body>
-</html>`;
-                
-                // Open the new page in a new window
-                const newWindow = window.open('', '_blank');
-                newWindow.document.write(newPage);
-                newWindow.document.close();
+                // Open corresponding HTML file in a new tab
+                window.open(`${boneName}.html`, '_blank');
             });
         });
     </script>
-
-    <script>
-document.querySelectorAll('.card.clickable').forEach(card => {
-    card.addEventListener('click', () => {
-        const boneName = card.getAttribute('data-bone');
-        // Open corresponding HTML file in a new tab
-        window.open(`${boneName}.html`, '_blank');
-    });
-});
-</script>
-
 </body>
 </html>
